@@ -18,8 +18,7 @@ class VentanaPrincipal(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Aplicacion con Box")
-
+        self.setWindowTitle("EJemplo con Box")
         contenedorPrincipal= QHBoxLayout()
         caja2 = QVBoxLayout()
         caja3 = QVBoxLayout()
