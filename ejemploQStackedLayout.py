@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QApplication, QGridLayout, QLabel, QMainWindow, QWid
 from cajaColor import CajaColor #cajaColor es la clase y CajaColor es el metodo
 
 
-class GridConContenido(QGridLayout):
+class GridConContenido(QGridLayout):#GRID ES MALLA EN LA VENTANA
     def __init__(self):
         super().__init__()
 
@@ -19,7 +19,7 @@ class GridConContenido(QGridLayout):
         self.addWidget(CajaColor("yellow"), 2, 2, 1, 1)
 
 
-class HBoxModificado (QHBoxLayout):
+class HBoxModificado (QHBoxLayout):#ESte el box MOdificado
     def __init__(self):
         super().__init__()
 
