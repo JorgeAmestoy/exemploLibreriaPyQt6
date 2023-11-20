@@ -22,8 +22,8 @@ class VentanaPrincipal(QMainWindow):
         self.setFixedSize(400, 800)
 
 
-
-aplicacion = QApplication(sys.argv)
-ventana = VentanaPrincipal()
-ventana.show()
-aplicacion.exec()
+if __name__ == "__main__":
+    aplicacion = QApplication(sys.argv)
+    ventana = VentanaPrincipal()
+    ventana.show()
+    aplicacion.exec()
