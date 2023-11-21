@@ -115,6 +115,23 @@ print("Tercer elemento:", tercer_elemento)
 ```
 --------------------------------
 
+**FOR IN**<br>
+```
+if indices:
+    for indice in indices:
+        print(f"Procesando el índice {indice.row()}")  # Imprime el número de fila del índice actual
+        # Puedes realizar otras operaciones relacionadas con el índice aquí
+
+# Código fuera del bucle
+print("Fin del procesamiento")
+
+```
+Va itereando por todos los elementos de la lista indices y va guardando cada vez qyue enecuentra uno en le variable indice?
+
+
+
+----------------------------------
+
 **EJEMPLOQLISTVIEW**
 
 -------------------------------
@@ -144,3 +161,13 @@ sea del tipo texto visible haz lo siguiente:
 Se asume que cada elemento es una tupla con al menos dos elementos: un estado y un texto.<br>
 
 `return texto:` Devuelve el texto de la tarea. En este contexto, significa que cuando se solicita el dato para la visualización de un ítem, se proporciona el texto asociado con ese ítem.
+
+```
+   def rowCount(self, indice):
+       return len(self.tareas)
+```
+Este método nos dice el número total de filas, es decir, de items(en este caso, tareas).
+Es un método abstracto e interno, es decir, aunque yo no lo use como tal, cuando uso el 
+QListView() para llamar al modelo, sepa con qué trabaja y cómo hacerlo. EN este caso, necesita
+contar las filas. Si en vez de una lista estuviese trabajando con una base de datos, usaría otra
+función.
