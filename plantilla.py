@@ -14,16 +14,18 @@ class VentanaPrincipal(QMainWindow):
 
         self.setWindowTitle("Mi primera aplicacion")
 
+        #1ª WIDGETS
+        #2º LAYOUTS
+        #3º CONTENEDOR
 
 
 
 
-
-        self.setFixedSize(400, 800)
 
 
 if __name__ == "__main__":
     aplicacion = QApplication(sys.argv)
     ventana = VentanaPrincipal()
+    ventana.setFixedSize(400,400)
     ventana.show()
     aplicacion.exec()

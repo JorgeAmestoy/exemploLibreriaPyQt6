@@ -11,7 +11,7 @@ class SegundaVentana(QMainWindow):#clase que hereda las propiedades de QMainWind
 
         self.setWindowTitle("Mi segunda ventana con Qt")#LLamo a un método de la clase para poner el titulo de la ventana
 
-        self.txtSaludo = QLineEdit()#Es un objeto que sirve para...¿?
+        self.txtSaludo = QLineEdit()
         #self.txtSaludo.editingFinished.connect(self.on_botonSaludo_clicked)#Para que cuando pulsemos enter se cambie solo el texto sin ncesidad de darle click con el ratón
         self.txtSaludo.returnPressed.connect(self.on_botonSaludo_clicked)#Otra forma de hacer lo mismo que el de arriba
 
@@ -43,7 +43,7 @@ class SegundaVentana(QMainWindow):#clase que hereda las propiedades de QMainWind
         self.setFixedSize(400,400)
         self.show()
 
-    def on_botonSaludo_clicked(self):#Tiene que llamarse igual que como lo declaraste en el clicked.connect.
+    def on_botonSaludo_clicked(self):
         saludo = self.txtSaludo.text()
         self.lblEtiqueta1.setText(saludo)
 

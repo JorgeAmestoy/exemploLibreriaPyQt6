@@ -1,8 +1,8 @@
 import sys
 
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget, QLineEdit, QHBoxLayout
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtGui import *
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
 
 class TerceraVentana(QMainWindow):
     def __init__(self):#Lo primero que hacemos es llamar al inicializador(constructor) de la super clase
