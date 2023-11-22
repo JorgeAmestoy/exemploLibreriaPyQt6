@@ -1,9 +1,10 @@
 import sys
 
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QApplication, QGridLayout, QLabel, QMainWindow, QWidget
+from PyQt6.QtCore import *
+from PyQt6.QtWidgets import *
+from PyQt6.QtGui import *
 
-from cajaColor import CajaColor #cajaColor es la clase y CajaColor es el metodo
+from cajaColor import *
 
 class VentanaPrincipal (QMainWindow):
     def __init__(self):
@@ -13,6 +14,7 @@ class VentanaPrincipal (QMainWindow):
 
         red = QGridLayout()
 
+
         red.addWidget(CajaColor("red"))
         red.addWidget(CajaColor("blue"),0,1,1,2)
         red.addWidget(CajaColor("green"),1,0,2,1)
@@ -20,13 +22,16 @@ class VentanaPrincipal (QMainWindow):
         red.addWidget(CajaColor("orange"),2,1,1,1)
         red.addWidget(CajaColor("yellow"),2,2,1,1)
 
-        control = QWidget()
-        control.setLayout(red)
-        self.setCentralWidget(control)
+
+
+        container = QWidget()
+        container.setLayout(red)
+        self.setCentralWidget(container)
         self.show()
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     ventana = VentanaPrincipal()
+    ventana.setFixedSize(400,400)
     app.exec()

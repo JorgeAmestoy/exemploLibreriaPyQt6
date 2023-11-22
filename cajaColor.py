@@ -1,9 +1,8 @@
 import sys
 
-#Buscar para que es cada libreria
-from PyQt6.QtGui import QColor, QPalette
-from PyQt6.QtWidgets import (QWidget, QApplication, QHBoxLayout, QVBoxLayout, QLabel, QMainWindow)
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import *
+from PyQt6.QtWidgets import *
+from PyQt6.QtGui import *
 
 
 class CajaColor(QWidget):
@@ -19,29 +18,42 @@ class VentanaPrincipal(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("EJemplo con Box")
-        contenedorPrincipal= QHBoxLayout()
+        cajaHorizontalBase= QHBoxLayout()
         caja2 = QVBoxLayout()
-        caja3 = QVBoxLayout()
+
 
         caja2.addWidget(CajaColor("red"))
         caja2.addWidget(CajaColor("yellow"))
         caja2.addWidget(CajaColor("blue"))
-        contenedorPrincipal.addLayout(caja2)
 
-        contenedorPrincipal.addWidget(CajaColor("green"))
+        cajaHorizontalBase.addLayout(caja2)
 
+        cajaHorizontalBase.addWidget(CajaColor("green"))
+
+        caja3 = QVBoxLayout()
         caja3.addWidget(CajaColor("blue"))
         caja3.addWidget(CajaColor("orange"))
-        contenedorPrincipal.addLayout(caja3)
+        cajaHorizontalBase.addLayout(caja3)
 
-        widgetPrincipal = QWidget()
-        widgetPrincipal.setLayout(contenedorPrincipal)
-        self.setCentralWidget(widgetPrincipal)
+        caja4 = QHBoxLayout()
+        caja4.addWidget(CajaColor("pink"))
+        caja4.addWidget(CajaColor("black"))
+        caja4.addWidget(CajaColor("white"))
+        cajaHorizontalBase.addLayout(caja4)
+
+        cajaHorizontalBase.addWidget(CajaColor("pink"))
+
+
+
+        container = QWidget()
+        container.setLayout(cajaHorizontalBase)
+        self.setCentralWidget(container)
 
 
 if __name__ == "__main__":
     app =QApplication(sys.argv)
     ventana = VentanaPrincipal()
     ventana.show()
+    ventana.setFixedSize(400, 400)
     sys.exit(app.exec())
 

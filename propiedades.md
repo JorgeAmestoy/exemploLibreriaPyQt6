@@ -20,6 +20,12 @@ etiqueta2 = QLabel()
 etiqueta2.setPixmap(QPixmap("fotoluci2.jpg"))
 ```
 --------------------------
+**PERSONALIZAR ETIQUETA**
+```
+ etiqueta = QLabel("Soy una etiqueta")
+        etiqueta.setFixedSize(100,50)
+        etiqueta.setStyleSheet("background-color: yellow; color: black;")
+```
 **CAJA DE TEXTO**<br>
 Área de entrada de texto donde usuario puede escribir o editar texto.
 ```
@@ -77,6 +83,13 @@ cajaHorizontal.addWidget(self.txtCaja) # Añado botón a la caja
 # PONER EL SELF SI LO VOY A USAR EL BOTÓN, CAJA DE ENTRADA... EN LA FUNCIÓN!!!
 ```
 ---------------------------
+**QGriDLayout/MALLA** (ejemploGridLayout)
+```
+malla = QGridLayout()
+malla.addWidget(etiqueta)
+malla.addWidget(etiqueta2,0,0,2,3)
+malla.addWidget(boton,2,0,1,2)
+```
 **CONTENEDOR**<br>
 Añado el layout(cajaVertical) al contenedor final, es decir, al Widget base de la ventana, sobre el que va a estar todo el contenido(layouts, botones..)
 ```
@@ -120,7 +133,7 @@ para cambiar el contenido de la etiqueta según lo que escribamos en la caja de 
 
 -------------------------------------
 
-# FUNCIONES
+# MÉTODOS
 
 ---------------------------------------
 
@@ -130,10 +143,27 @@ def on_botonSaludo_clicked(self):
      saludo = self.txtSaludo.text() # Guardamos el contenido de la caja de texto en una variable
      self.lblEtiqueta1.setText(saludo) # Añadimos dicho contenido de la variable en la etiqueta
 ```
-
+------------------------------------
+**MÉTODO INIT DE CajaColor**
 ```
-
-
+class CajaColor(QWidget):
+    def __init__(self,color):
+        super().__init__()
+        self.setAutoFillBackground(True)
+        paleta = self.palette()
+        paleta.setColor(QPalette.ColorRole.Window, QColor(color))
+        self.setPalette(paleta)
 ```
+En este clase, creo en el método init una función para poder colorear
+los layouts(QVBox, GridLayout...).
+Para usarlo lo hago así: `cajaV.addWidget(CajaColor("red"))`. Estoy utilizando
+la clase CajaColor como si fuese un widget, ya que al CajaColor heredar de la súper clase
+**QWidget** y al crear una instancia, estoy obteniendo un objeto que se comporta como un widget.
+-----------------------------------
+**OTROS**
+```
+.text()
+```
+Para obtener el texto que se le da a una etiqueta, botón...
 
 ```
