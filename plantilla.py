@@ -20,8 +20,8 @@ class VentanaPrincipal(QMainWindow):
 
 
         container = QWidget()
+        container.setLayout()  # Añadir layout principal
         self.setCentralWidget(container)
-        self.setFixedSize(400,400)
         self.show()
 
 
@@ -29,5 +29,6 @@ class VentanaPrincipal(QMainWindow):
 if __name__ == "__main__":
     aplicacion = QApplication(sys.argv)
     ventana = VentanaPrincipal()
+    #ventana .setFixedSize(400,400)
     ventana.show()
     aplicacion.exec()
