@@ -1,6 +1,17 @@
-# WIDGETS
+<p align="center"><b><font size="7">PROPIEDADES PYQT6</font></b></p>
 
-<br>
+----------------------------------
+
+# INICIO
+[WIDGETS](#widgets)<br>
+[LAYOUTS](#layouts)<br>
+[MÉTODOS](#metodos)<br>
+[PERSONALIZAR](#personalizar)<br>
+[OTROS](#otros)<br>
+
+----------------------------------
+
+## WIDGETS
 
 -------------------------
 
@@ -73,14 +84,16 @@ lswLista.setFixedSize(300,200)
 ```
 CREAR LISTA: 
 ```
-lstTareas = QListView() # Creo una lista
-lstTareas.setModel(self.modelo) # Añado instancia de la clase Modelo para trabajar con la lista
-cajaV.addWidget(lstTareas)# Añado el QListView al layout vertical # Añado la lista al layout
+lstTareas = QListView() # Creo objeto tipo QListView
+lstTareas.setModel(self.modelo) # Añado el modelo que he creado de lista (su forma, qué va a mostrar...)
+cajaV.addWidget(lstTareas)# Añado el QListView al layout vertical
 ```
 ----------------------------
 
 
 ## LAYOUTS
+
+[Volver arriba](#inicio)</sup>
 
 ---------------------
 **QVBOXLAYOUT**<br>
@@ -190,7 +203,9 @@ El contenedor es de tipo Widget.
 
 -------------------------------------
 
-# PERSONALIZAR
+## PERSONALIZAR
+
+[Volver arriba](#inicio)</sup>
 
 --------------------------------
 ESTABLECER EL NOMBRE DE LA VENTANA PRINCIPAL
@@ -232,7 +247,9 @@ tabs.setTabPosition(QTabWidget.TabPosition.South)
 ```
 
 -------------------------------
-# MÉTODOS
+## METODOS
+
+[Volver arriba](#inicio)</sup>
 
 ---------------------------------------
 
@@ -255,7 +272,54 @@ Luego, en `paleta.setColor(QPalette.ColorRole.Window, QColor(color))` digo que e
 será en que escriba en la instancia del objeto de esta clase, pues en el constructor puse como parámetros
 el self y el color. Entonces, cuando llame a dicha clase tengo que escribir el color: (`CajaColor("blue")`).
 -----------------------------------
+
+### MÉTODO DATA DE EJEMPLOQLISTVIEW
+```
+def data(self, indice, rol):
+
+    if (rol == Qt.ItemDataRole.DisplayRole):# En caso de que el rol sea el de visualización del ítem, en este caso, un texto visible...:
+        _, texto = self.tareas[indice.row()] # Accede al elemento de la lista (self.tareas) correspondiente a la posición indicada por el índice de fila (indice.row()). Se asume que cada elemento es una tupla con al menos dos elementos: un estado y un texto. Recogemos una fila y nos da el estado y el texto, y solo nos interesa el texto. ASi data nos devuelve el texto que metamos en tarefas.
+        return texto # Devuelve el texto de la tarea
+
+    if (rol ==Qt.ItemDataRole.DecorationRole): # Verifica si es una imagen: En caso de que lo sea..:
+        estado,_ = self.tareas[indice.row()] # EL guion significa que no le ponemos nombre a la variable. Aqui solo pondremos el estado aunque trabajemos en una tupla de dos. LO mismo en el de arriba.
+        #Barrabaja es porque decimos que vamos a trabajar con una tupla de dos elementos pero que solo vamos a trabajar con uno, en este caso, el estado.
+        if estado:# es como decir if estado is True:
+           return tickImage
+```
+
+`def data(self, indice, rol):` : Es un metodo que heredo de la clase padre QAbstractListModel, la cual recibe por parámetros un indice y un rol.
+<br> El *indice* representa la posición de un item(empieza desde cero)
+y el *rol* indica el tipo de datos que se está solicitando para el item en el índice dado:
+- Texto Visible: *Qt.ItemDataRole.DisplayRole*
+- Texto para edición: *Qt.ItemDataRole.EditRole*
+- Icono: *Qt.ItemDataRole.DecorationRole*
+<br>
+
+` if (rol == Qt.ItemDataRole.DisplayRole):`: En caso de que el rol
+sea del tipo texto visible haz lo siguiente:
+
+`estado, texto = self.tareas[indice.row()]:` Accede al elemento de la lista (self.tareas) correspondiente a la posición indicada por el índice de fila (indice.row()). 
+Se asume que cada elemento es una tupla con al menos dos elementos: un estado y un texto.<br>
+
+`return texto:` Devuelve el texto de la tarea. En este contexto, significa que cuando se solicita el dato para la visualización de un ítem, se proporciona el texto asociado con ese ítem.
+
+```
+   def rowCount(self, indice):
+       return len(self.tareas)
+```
+Este método nos dice el número total de filas, es decir, de items(en este caso, tareas).
+Es un método abstracto e interno, es decir, aunque yo no lo use como tal, cuando uso el 
+QListView() para llamar al modelo, sepa con qué trabaja y cómo hacerlo. EN este caso, necesita
+contar las filas. Si en vez de una lista estuviese trabajando con una base de datos, usaría otra
+función.
+
+----------------------------------------------
+
 ## OTROS
+
+[Volver arriba](#inicio)</sup>
+
 **LAYOUTS Y CONTAINERS** (ejemploCheckBoxRadio)
 ```
 cajaV2 = QVBoxLayout()# Creo caja vertical2
@@ -266,7 +330,7 @@ cajaV1.addWidget(containerV2)#Añado el contenedor con la cajaV2 a la caja verti
 cajaV3 = QVBoxLayout()
 cajaV1.addLayout(cajaV3)
 ```
-**Los contenedores son consideras widgets**. Así: <br>
+**Los contenedores son considerados widgets**. Así: <br>
 Añadir layout/caja al contenedor: `containerV2.setLayout(cajaV2)`<br>
 Añadir contenedor al layout/caja: `cajaV1.addWidget(containerV2)`<br>
 Añadir layout/caja al layout/caja: `cajaV1.addLayout(cajaV3)`

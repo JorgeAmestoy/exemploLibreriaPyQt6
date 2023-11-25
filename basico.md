@@ -1,3 +1,6 @@
+<p align="center"><b><font size="7">EXPLICACIONES BÁSICAS PYTHON</font></b></p>
+
+--------------------------
 ```
 from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
@@ -65,13 +68,7 @@ Si me fijo en los códigos, **todo lo que añado a la ventana lo hago dentro
 del constructor.**
 
 -----------------------
-**MÉTODO SHOW**<br>
-Puedo llamar al método *show()* o bien, dentro del
-constructor de la ventana principal con `self.show()`,
-o fuera de la clase con el objeto/variable llamado *ventana*, en la que creo una instancia de dicha clase
-y al heredar de QMainWindow puedo usar el método *show()*.
 
----------------------------
 **SELF**<br>
 El self en Python se refiere a la instancia actual de la clase. Puedes pensar en él como una forma de referirte a sí mismo dentro de los métodos de una clase.
 
@@ -97,7 +94,73 @@ En resumen, digo que la edad que pase luego como argumento, sea la edad de la in
 
 ----------------------
 
-**TUPLAS**
+### MÉTODO SHOW<br>
+Puedo llamar al método *show()* o bien, dentro del
+constructor de la ventana principal con `self.show()`,
+o fuera de la clase con el objeto/variable llamado *ventana*, en la que creo una instancia de dicha clase
+y al heredar de QMainWindow puedo usar el método *show()*.
+
+---------------------------
+### FIRMAS DE MÉTODOS
+Posicionando el cursor sobre métodos heredados de otras clases nos enseña detalles sobre este. Por ejemplo:<br>
+
+Aquí digo que el método va a recibir obligatoriamente una variable de tipo String.
+
+```
+def __init__(self, nombre: [str]):
+```
+-------------------------------
+<br>
+Aquí digo que va a recibir de manera opcional el parámetro. Si no lo uso, cuando haga la instancia tengo que escribir None.
+
+```
+def __init__(self, nombre: Optional[str]):
+     self.nombre = nombre
+     
+objeto_con_nombre = Ejemplo(nombre="Alice")
+objeto_con_nombre.saludar()
+     
+objeto_sin_nombre = Ejemplo(nombre=None)
+objeto_sin_nombre.saludar()
+```
+
+-------------------------
+<br>
+Aquí pido por parámetro una variable de cualquier tipo y de uso opcional:
+
+```
+def ejemploMetodo(self, variable: Any = None) -> int:
+    # Implementación del método
+    # ...
+    return numero
+```
+Por lo tanto, este método va a recibir como parámetro una variable.<br>
+**Any** signfica que la variable *indice* puede ser de cualquier tipo.<br>
+**None** significa que el uso de este parámetro es opcional. <br>
+**-> int:** significa que dicho método nos va a devolver un int.<br>
+Así, aunque al trabajar en el método nos lo use, hay que escribirlos en la definición de este.<br> <br>
+-------------------------
+<br>
+
+El término iterable en este contexto se utiliza para indicar que se espera cualquier tipo de objeto que sea iterable. Con la barra indico que las siguientes palabras serán **palabras clave**. Key será opcional
+y el reverse si no se especifica que va a ser True, será False por defecto.
+```
+sorted(iterable, /, *, key=None, reverse=False)
+```
+Ejemplo usando la key y el reverse False:
+```
+# Ordenar una lista de cadenas por longitud en orden ascendente
+palabras = ["manzana", "banana", "uva", "kiwi"]
+palabras_ordenadas = sorted(palabras, key=len)
+print(palabras_ordenadas)
+# Salida: ['uva', 'kiwi', 'banana', 'manzana']
+
+```
+Por lo tanto, **key=len** especifica que la longitud de cada cadena (len) debe usarse como criterio para la ordenación. **Reverse** no se proporciona, por lo que la ordenación es en orden ascendente (longitudes más cortas primero).
+
+---------------------------------
+
+## TUPLAS
 ```
 # Definir una tupla
 mi_tupla = (1, 'Hola', 3.14)
@@ -125,15 +188,18 @@ mi_tupla = (1, 'dos', 3.0)
 
 mi_lista = [1, 'dos', 3.0]
 ```
+Así, en las listas puedo añadir(append), eliminar(remove).. después de haberla creado, mientras que en la tupla, una vez que haya sido creada,
+no puedo modificar su contenido.
 
 ----------------------------------
 
 #### ENUMERATE
+Es una función que itera sobre una lista/tupla y nos retorna una tupla con el índice y el valor de los elementos
 ```
-frutas = ['manzana', 'plátano', 'uva']
+frutas = ['manzana', 'plátano', 'uva']# Creo una lista
 
 # Usando enumerate para obtener índice y valor al mismo tiempo
-for indice, fruta in enumerate(frutas):
+for indice, fruta in enumerate(frutas): # Itero en la lista
     print(f"Índice: {indice}, Fruta: {fruta}")
 
 DANDO COMO SALIDA:
@@ -149,8 +215,7 @@ DANDO COMO SALIDA:
 if indices:
     for indice in indices:
         print(f"Procesando el índice {indice.row()}")  # Imprime el número de fila del índice actual
-        # Puedes realizar otras operaciones relacionadas con el índice aquí
-
+       
 # Código fuera del bucle
 print("Fin del procesamiento")
 
@@ -158,42 +223,3 @@ print("Fin del procesamiento")
 Va itereando por todos los elementos de la lista indices y va guardando lo que encuentra en la variable indice.
 
 ----------------------------------
-## EJEMPLOQLISTVIEW
-
--------------------------------
-
-### MÉTODO DATA
-```
- def data(self, indice, rol):
-     # Verifica si el rol es el de visualización del ítem, en este caso, verifica si es texto
-        if (rol == Qt.ItemDataRole.DisplayRole):
-            # Obtiene el estado y el texto de la tarea en la posición dada por el índice
-            estado, texto = self.tareas[indice.row()]
-            return texto # Devuelve el texto de la tarea
-```
-
-`def data(self, indice, rol):` : Es un metodo que heredo de la clase padre QAbstractListModel, la cual recibe por parámetros un indice y un rol.
-<br> El *indice* representa la posición de un item(empieza desde cero)
-y el *rol* indica el tipo de datos que se está solicitando para el item en el índice dado:
-- Texto Visible: *Qt.ItemDataRole.DisplayRole*
-- Texto para edición: *Qt.ItemDataRole.EditRole*
-- Icono: *Qt.ItemDataRole.DecorationRole*
-<br>
-
-` if (rol == Qt.ItemDataRole.DisplayRole):`: En caso de que el rol
-sea del tipo texto visible haz lo siguiente:
-
-`estado, texto = self.tareas[indice.row()]:` Accede al elemento de la lista (self.tareas) correspondiente a la posición indicada por el índice de fila (indice.row()). 
-Se asume que cada elemento es una tupla con al menos dos elementos: un estado y un texto.<br>
-
-`return texto:` Devuelve el texto de la tarea. En este contexto, significa que cuando se solicita el dato para la visualización de un ítem, se proporciona el texto asociado con ese ítem.
-
-```
-   def rowCount(self, indice):
-       return len(self.tareas)
-```
-Este método nos dice el número total de filas, es decir, de items(en este caso, tareas).
-Es un método abstracto e interno, es decir, aunque yo no lo use como tal, cuando uso el 
-QListView() para llamar al modelo, sepa con qué trabaja y cómo hacerlo. EN este caso, necesita
-contar las filas. Si en vez de una lista estuviese trabajando con una base de datos, usaría otra
-función.
