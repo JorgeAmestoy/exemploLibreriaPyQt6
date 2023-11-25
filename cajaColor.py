@@ -4,11 +4,11 @@ from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 
-
+# Clase que hereda de QWidget y nos devuelve un Widget
 class CajaColor(QWidget):
     def __init__(self,color):
         super().__init__()
-        self.setAutoFillBackground(True)
+        self.setAutoFillBackground(True) # Rellenar el fondo de un color
         paleta = self.palette()
         paleta.setColor(QPalette.ColorRole.Window, QColor(color))
         self.setPalette(paleta)

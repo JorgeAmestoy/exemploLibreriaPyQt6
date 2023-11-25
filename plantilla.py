@@ -12,9 +12,7 @@ class VentanaPrincipal(QMainWindow):
 
         self.setWindowTitle("Mi primera aplicacion")
 
-        #1ª WIDGETS
-        #2º LAYOUTS
-        #3º CONTENEDOR
+
 
 
 
@@ -22,13 +20,13 @@ class VentanaPrincipal(QMainWindow):
         container = QWidget()
         container.setLayout()  # Añadir layout principal
         self.setCentralWidget(container)
+        #self.setFixedSize(400,400)
         self.show()
+
 
 
 
 if __name__ == "__main__":
     aplicacion = QApplication(sys.argv)
     ventana = VentanaPrincipal()
-    #ventana .setFixedSize(400,400)
-    ventana.show()
     aplicacion.exec()

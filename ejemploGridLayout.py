@@ -12,20 +12,20 @@ class VentanaPrincipal (QMainWindow):
 
         self.setWindowTitle("Ejemplo Grid Layout con Qt")
 
-        red = QGridLayout()
+        grid = QGridLayout()
 
+        grid.addWidget(CajaColor("red"),0,0,1,1)
+        grid.addWidget(CajaColor("green"),1,0,2,1)
+        grid.addWidget(CajaColor("blue"), 0, 1, 1, 2)
+        grid.addWidget(CajaColor("pink"), 1, 1, 1, 2)
+        grid.addWidget(CajaColor("orange"), 2, 1, 1, 1)
+        grid.addWidget(CajaColor("yellow"), 2, 2, 1, 1)
 
-        red.addWidget(CajaColor("red"))
-        red.addWidget(CajaColor("blue"),0,1,1,2)
-        red.addWidget(CajaColor("green"),1,0,2,1)
-        red.addWidget(CajaColor("pink"),1,1,1,2)
-        red.addWidget(CajaColor("orange"),2,1,1,1)
-        red.addWidget(CajaColor("yellow"),2,2,1,1)
 
 
 
         container = QWidget()
-        container.setLayout(red)
+        container.setLayout(grid)
         self.setCentralWidget(container)
         self.show()
 

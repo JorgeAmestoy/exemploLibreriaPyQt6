@@ -10,7 +10,7 @@ Se importan los módulos necesarios de PyQt6 y el módulo sys.
 class MainWindow(QMainWindow):
     pass
 ```
-Para empezar en Python las clases y sus miembros son **públcos** por defecto.
+Para empezar, en Python las clases y sus miembros son **públcos** por defecto.
 <br>Así, aquí se define una nueva clase llamada **MainWindow** que hereda de **QMainWindow**. En este ejemplo, la clase está vacía (pass), lo que significa que no tiene ningún contenido adicional.
 <br>La ventana predeterminada que se abre sin añadir ningún widget es por esta herencia.
 ```
@@ -96,6 +96,7 @@ En resumen, digo que la edad que pase luego como argumento, sea la edad de la in
         print(self.edad)` .
 
 ----------------------
+
 **TUPLAS**
 ```
 # Definir una tupla
@@ -112,6 +113,34 @@ print("Primer elemento:", primer_elemento)
 print("Segundo elemento:", segundo_elemento)
 print("Tercer elemento:", tercer_elemento)
 
+#Imprimir la tupla con for in
+for elemento in mi_tupla:
+    print(elemento)
+
+```
+
+**LISTA vs TUPLA**
+```
+mi_tupla = (1, 'dos', 3.0)
+
+mi_lista = [1, 'dos', 3.0]
+```
+
+----------------------------------
+
+#### ENUMERATE
+```
+frutas = ['manzana', 'plátano', 'uva']
+
+# Usando enumerate para obtener índice y valor al mismo tiempo
+for indice, fruta in enumerate(frutas):
+    print(f"Índice: {indice}, Fruta: {fruta}")
+
+DANDO COMO SALIDA:
+Índice: 0, Fruta: manzana
+Índice: 1, Fruta: plátano
+Índice: 2, Fruta: uva
+
 ```
 --------------------------------
 
@@ -126,17 +155,14 @@ if indices:
 print("Fin del procesamiento")
 
 ```
-Va itereando por todos los elementos de la lista indices y va guardando cada vez qyue enecuentra uno en le variable indice?
-
-
+Va itereando por todos los elementos de la lista indices y va guardando lo que encuentra en la variable indice.
 
 ----------------------------------
-
-**EJEMPLOQLISTVIEW**
+## EJEMPLOQLISTVIEW
 
 -------------------------------
 
-MÉTODO DATA
+### MÉTODO DATA
 ```
  def data(self, indice, rol):
      # Verifica si el rol es el de visualización del ítem, en este caso, verifica si es texto

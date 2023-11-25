@@ -21,10 +21,10 @@ class VentanaPrincipal (QMainWindow):
         cajaV1.addWidget(self.chkBoton2)
 
         #Metemos el layout cajaVertical2 en el wdiget llamado containerV2 y lo añadimos al layout de la caja vertical 1
-        cajaV2 = QVBoxLayout()
-        containerV2 = QWidget()
-        containerV2.setLayout(cajaV2)
-        cajaV1.addWidget(containerV2)#Aqui añadimos widget en vez de layout
+        cajaV2 = QVBoxLayout()# Creo caja vertical2
+        containerV2 = QWidget()# Creo contenedor
+        containerV2.setLayout(cajaV2)# Añado la caja vertical 2 al contenedor
+        cajaV1.addWidget(containerV2)#Añado el contenedor con la cajaV2 a la caja vertical 1
 
         self.rbtRadioButton1 = QRadioButton("Opción 1", containerV2)
         self.rbtRadioButton1.toggled.connect (self.on_rbtRadioButton1_toggled)

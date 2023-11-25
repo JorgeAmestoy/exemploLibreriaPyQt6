@@ -1,6 +1,10 @@
-from PyQt6.QtGui import *
-from PyQt6.QtWidgets import *
-from PyQt6.QtCore import *
+import sys
+
+from PyQt6.QtWidgets import (QApplication, QMainWindow, QPushButton, QLabel,QCheckBox,
+                             QVBoxLayout, QHBoxLayout, QWidget, QListView, QLineEdit,
+                             QComboBox, QGridLayout, QSlider, QFrame)
+from PyQt6.QtCore import Qt, QAbstractListModel
+from PyQt6.QtGui import QPixmap
 
 
 
@@ -74,12 +78,19 @@ class VentanaPrincipal(QMainWindow):
 
 
 
-        cajaHorizontalFrame = QHBoxLayout()
-        frameReproduccion = QFrame()# Añade al frame la caja horizontal del frame
-        frameReproduccion.setLayout(cajaHorizontalFrame)
-        frameReproduccion.setObjectName("Opcions de reproduccion")
-        cajaHorizontal2.addWidget(frameReproduccion)
-        cajaVIzquierda = QVBoxLayout()
+        cajaHorizontalFrame = QHBoxLayout()# Creo caja horizontal del ftrame
+        frameReproduccion = QFrame()# Creo el frame
+        frameReproduccion.setFrameStyle(QFrame.Shape.Box)
+        frameReproduccion.setLayout(cajaHorizontalFrame)# Añado la caja horizontal del frame al frame
+        frameReproduccion.setWindowTitle("Opcions de reproduccion")
+        cajaHorizontal2.addWidget(frameReproduccion)# Añado el frame con la caja a la caja horizontal
+        cajaVIzquierda = QVBoxLayout() #caja vertical
+        chkFiltrar = QCheckBox("Filtrar antes de reproducir")
+        chkEXml = QCheckBox("É XML")
+        chkReproduccion = QCheckBox("Reproducción NPL")
+        cajaVIzquierda.addWidget(chkFiltrar)
+        cajaVIzquierda.addWidget(chkEXml)
+        cajaVIzquierda.addWidget(chkReproduccion)
         cajaVDerecha = QVBoxLayout()
         cajaHorizontalFrame.addLayout(cajaVIzquierda)
         cajaHorizontalFrame.addLayout(cajaVDerecha)
@@ -89,16 +100,6 @@ class VentanaPrincipal(QMainWindow):
         cajaVDerecha.addWidget(checkBoxAsincrono)
         cajaVDerecha.addWidget(checkBoxNome)
         cajaVDerecha.addWidget(checkBoxXML)
-
-
-
-
-
-
-
-
-
-
 
 
 
