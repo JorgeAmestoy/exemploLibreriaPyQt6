@@ -56,7 +56,7 @@ persona1 = Persona("Juan", 25)
 
 ```
 En programación, un constructor es un método especial dentro de una clase que se llama automáticamente cuando se crea un objeto (una instancia) de esa clase. <br>En Python el constructor es así:  ```def __init__(self):``` .<br> Su propósito principal es realizar cualquier inicialización necesaria para el objeto.<br> 
-Sería como darle la forma inicial y a seguir a la Persona con su nombre y edad.
+Sería como darle la forma inicial y el patrón a seguir a la Persona, con su nombre y edad.
 
 El objeto es persona1. En la programación orientada a objetos, un objeto es una instancia de una clase. La clase Persona es como un "molde" que define la estructura y el comportamiento que tendrán las instancias de la clase Persona.<br>
 La línea *persona1 = Persona("Juan", 25)* crea una instancia de la clase Persona y la asigna a la variable persona1.
@@ -144,11 +144,11 @@ objeto_sin_nombre = Ejemplo(nombre=None)
 objeto_sin_nombre.saludar()
 ```
 -------------------------
-#### NONE
+#### ANY
 Aquí pido por parámetro una variable de cualquier tipo y de uso opcional:
 
 ```
-def ejemploMetodo(self, variable: Any = None) -> int:
+def ejemploMetodo(self, indice: Any = None) -> int:
     # Implementación del método
     # ...
     return numero
@@ -157,7 +157,7 @@ Por lo tanto, este método va a recibir como parámetro una variable.<br>
 **Any** signfica que la variable *indice* puede ser de cualquier tipo.<br>
 **None** significa que el uso de este parámetro es opcional. <br>
 **-> int:** significa que dicho método nos va a devolver un int.<br>
-Así, aunque al trabajar en el método nos lo use, hay que escribirlos en la definición de este.<br> <br>
+Así, aunque al trabajar en el método no los use, hay que escribirlos en la definición de este.<br> <br>
 -------------------------
 
 #### SORTED
@@ -193,28 +193,32 @@ y al heredar de QMainWindow puedo usar el método *show()*.
 ## TUPLAS
 
 [Volver arriba](#inicio)</sup>
-```
-# Definir una tupla
-mi_tupla = (1, 'Hola', 3.14)
 
-# Acceder a elementos de la tupla
-primer_elemento = mi_tupla[0]  # 1
+Es como un array inmutable, una vez creada, no peuedo modificar su contenido.<br>
+Las tuplas se crean con paréntesis () y con comas ",", por lo que una tupla de un solo elemento sería `tupla=(20,)`.
+```
+# Defino tupla
+mi_tupla = (75, 'Hola', 3.14)
+
+# Accedo a sus elementos
+primer_elemento = mi_tupla[0]  # 75
 segundo_elemento = mi_tupla[1]  # 'Hola'
 tercer_elemento = mi_tupla[2]  # 3.14
 
-# Imprimir la tupla y algunos elementos
+# Imprimo la tupla y sus elementos
 print("Tupla completa:", mi_tupla)
 print("Primer elemento:", primer_elemento)
 print("Segundo elemento:", segundo_elemento)
 print("Tercer elemento:", tercer_elemento)
 
-#Imprimir la tupla con for in
+#Imprimo la tupla con for in
 for elemento in mi_tupla:
     print(elemento)
 
 ```
 
 ### LISTA vs TUPLA
+Las listas se crean con corchetes `lista=[42]`.
 ```
 mi_tupla = (1, 'dos', 3.0)
 
@@ -231,11 +235,14 @@ no puedo modificar su contenido.
 Es una función que itera sobre una **lista/tupla** y nos retorna una tupla con el índice y el valor de los elementos.<br>
 Se utiliza para agregar índices a elementos de un iterable, mientras que los **diccionarios** se utilizan para asociar claves con valores. 
 ```
-frutas = ['manzana', 'plátano', 'uva']# Creo una lista
+# Creo una lista
+frutas = ['manzana', 'plátano', 'uva']
 
-# Usando enumerate para obtener índice y valor al mismo tiempo
+# Uso enumerate para obtener índice y valor al mismo tiempo
 for indice, fruta in enumerate(frutas): # Itero en la lista
     print(f"Índice: {indice}, Fruta: {fruta}")
+    print("Índice: " + str(indice) + ", Fruta: " + fruta)
+
 
 DANDO COMO SALIDA:
 Índice: 0, Fruta: manzana

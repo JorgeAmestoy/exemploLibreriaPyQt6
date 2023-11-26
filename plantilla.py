@@ -17,7 +17,7 @@ class VentanaPrincipal(QMainWindow):
         container = QWidget()
         container.setLayout()  # Añadir layout principal
         self.setCentralWidget(container)
-        self.setFixedSize(400,400)
+        #self.setFixedSize(400,400)
         self.show()
 
 

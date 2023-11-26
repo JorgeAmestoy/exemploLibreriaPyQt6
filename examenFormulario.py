@@ -5,6 +5,20 @@ from PyQt6.QtCore import *
 
 
 import sys
+class ModeloLista(QAbstractListModel):
+    def __init__(self,musica = None):
+        super().__init__()
+        self.musica = musica or []
+
+
+    def data(self, indice, rol):
+        if (rol == Qt.ItemDataRole.DisplayRole):# En caso de que el rol sea el de visualización del ítem, en este caso, un texto visible...:
+            texto = self.musica[indice.row()] # Accede al elemento de la lista (self.tareas) correspondiente a la posición indicada por el índice de fila (indice.row()). Se asume que cada elemento es una tupla con al menos dos elementos: un estado y un texto. Recogemos una fila y nos da el estado y el texto, y solo nos interesa el texto. ASi data nos devuelve el texto que metamos en tarefas.
+            return texto # Devuelve el texto de la tarea
+
+    def rowCount(self, indice):
+        return len(self.musica)
+
 
 class VentanaPrincipal(QMainWindow):
     def __init__(self):
@@ -28,9 +42,15 @@ class VentanaPrincipal(QMainWindow):
         checkBoton = QCheckBox("Animado")
         cajaV2.addWidget(checkBoton)
         cajaV2.setAlignment(Qt.AlignmentFlag.AlignTop)
-        listaTareas = QListView()
-        listaTareas.setFixedSize(300,250)
-        cajaH1.addWidget(listaTareas)
+
+        ejemploLista = []
+        self.modelo = ModeloLista(ejemploLista)
+        self.listaMusica = QListView()
+        self.listaMusica.setModel(self.modelo)
+        self.listaMusica.setFixedSize(300,250)
+
+
+        cajaH1.addWidget(self.listaMusica)
         cajaV3 = QVBoxLayout()
         cajaH1.addLayout(cajaV3)
         boton1 = QPushButton("Engadir a pista a reproducir")
@@ -86,8 +106,9 @@ class VentanaPrincipal(QMainWindow):
         cajaH2.addWidget(groupBox)
         grid2 = QGridLayout()
         groupBox.setLayout(grid2)
-        checkBoton2 = QCheckBox("Asincrono")
-        grid2.addWidget(checkBoton2,0,0,1,1)
+        self.checkBoton2 = QCheckBox("Asincrono")
+        self.checkBoton2.toggled.connect(self.on_anadirLista_toggled)# Añado evento TOGGLED a CHECKBOTTON2
+        grid2.addWidget(self.checkBoton2,0,0,1,1)
         checkBoton3 = QCheckBox("Es nome de ficheiro")
         grid2.addWidget(checkBoton3,1,0,1,1)
         checkBoton4 = QCheckBox("XML persistente")
@@ -110,8 +131,8 @@ class VentanaPrincipal(QMainWindow):
         print("Valor del QSlider"+str(valor))
 
     def on_mostrarComboBox_activated(self, index):
-        cantante_seleccionada = self.combo1.currentText()
-        opcion_escogida = self.combo1.currentIndex()
+        cantante_seleccionada = self.combo1.currentText()# Guarda el texto del comboBox seleccionado
+        opcion_escogida = self.combo1.currentIndex() # Guarda el índice del combobox seleccionado
 
         print("Cantante seleccionada: "+cantante_seleccionada)
         print(f"Formato seleccionado: {cantante_seleccionada}")
@@ -119,9 +140,12 @@ class VentanaPrincipal(QMainWindow):
         print(f"Opcion escogida: {opcion_escogida}")
 
 
-
-
-
+    def on_anadirLista_toggled(self):
+        if self.checkBoton2.isChecked():
+            texto = self.checkBoton2.text()
+            if texto:
+                self.modelo.musica.append(texto)
+                self.modelo.layoutChanged.emit()
 
 
 

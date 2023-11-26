@@ -6,11 +6,12 @@
 # INICIO
 
 [CLICKED](#clicked)<br>
-[RETURN_PRESSED](#return-pressed)<br>
-[TOGGLED](#toggled)<br>
-[PRESSED](#pressed)<br>
-[VALUE_CHANGED](#value-changed)<br>
-[ACTIVATED](#activated)
+[RETURN_PRESSED(caja de texto)](#return-pressed)<br>
+[TOGGLED(radioButton/checkBox)](#toggled)<br>
+[PRESSED(listas)](#pressed)<br>
+[VALUE_CHANGED(sliders)](#value-changed)<br>
+[ACTIVATED](#activated)<br>
+[OTROS](#otros)
 
 -----------------------------
 
@@ -18,7 +19,8 @@
 
 -------------------------------
 
-### MÉTODO QUE AL HACER CLICK EN BOTÓN APARECE UN TEXTO EN UNA ETIQUETA(PrimeraVentana.py)
+### MÉTODO QUE AL HACER CLICK EN BOTÓN APARECE UN TEXTO EN UNA ETIQUETA
+(PrimeraVentana.py)
 ```
 #EN LA LLAMADA AL MÉTODO NO SE PONEN PARÉNTESIS
 #PONER SELF
@@ -32,7 +34,8 @@ def on_botonSaludo_clicked(self):
 
 ---------------------------------------
 
-### MÉTODO QUE AL HACER CLICK EN BOTÓN ESCRIBE EL TEXTO DE LA CAJA DE TEXTO EN UNA ETIQUETA(SegundaVentana.py)
+### MÉTODO QUE AL HACER CLICK EN BOTÓN ESCRIBE EL TEXTO DE LA CAJA DE TEXTO EN UNA ETIQUETA
+(SegundaVentana.py)
 ```
 #EN LA LLAMADA AL MÉTODO NO SE PONEN PARÉNTESIS
 #PONER SELF
@@ -52,7 +55,8 @@ def on_boton_clicked(self):
 
 --------------------------------------
 
-### MÉTODO QUE AL PUSAR ENTER EN LA CAJA DE TEXTO ESCRIBE TEXTO EN UNA ETIQUETA(SegundaVentana.py)
+### MÉTODO QUE AL PUSAR ENTER EN LA CAJA DE TEXTO ESCRIBE TEXTO EN UNA ETIQUETA
+(SegundaVentana.py)
 ```
 #EN LA LLAMADA AL MÉTODO NO SE PONEN PARÉNTESIS
 #PONER SELF
@@ -71,7 +75,8 @@ def on_txtCaja_enter(self):
 [Volver arriba](#inicio)</sup>
 
 ---------------------------------------------
-### MÉTODO QUE AL PULSAR CHECK_BOX IMPRIME POR PANTALLA QUÉ BOTÓN SE HA SELECCIONADO Y DESELECCIONADO(ejemploCheckboxRadio.py)<br>
+### MÉTODO QUE AL PULSAR CHECK_BOX IMPRIME POR PANTALLA QUÉ BOTÓN SE HA SELECCIONADO Y DESELECCIONADO<br>
+(ejemploCheckboxRadio.py)<br>
 Aquí usamos el método **isChecked()** del checkBox para realizar algo en caso de que se haya seleccionado dicho botón
 ```
 #EN LA LLAMADA AL MÉTODO NO SE PONEN PARÉNTESIS
@@ -87,9 +92,22 @@ Self.checkBox.toggled.connect(self.on_checkBox_toggled)
           print("Boton check deseleccionado: ", self.checkBox.text())
 ```
 
+--------------------------------------
+### MÉTODO QUE AÑADE A LA LISTA UNA TAREA AL SELECCIONAR UN CHECK_BOX
+(examenFormulario.py)
+```
+def on_anadirLista_toggled(self):
+    if self.checkBox.isChecked():
+       texto = self.checkBox2.text()
+       if texto:
+          self.modelo.musica.append(texto)
+          self.modelo.layoutChanged.emit()
+```
+
 -----------------------------------------------
 
-### MÉTODO QUE AL PULSAR RADIO_BUTTON IMPRIME POR PANTALLA QUÉ BOTÓN SE HA SELECCIONADO Y DESELECCIONADO(ejemploCheckboxRadio.py)<br>
+### MÉTODO QUE AL PULSAR RADIO_BUTTON IMPRIME POR PANTALLA QUÉ BOTÓN SE HA SELECCIONADO Y DESELECCIONADO<br>
+(ejemploCheckboxRadio.py)
 Igual que en el **CheckBox** aquí usamos el método **isChecked()** del radioButton para realizar algo en caso de que se haya seleccionado dicho botón
 
 ```
@@ -109,18 +127,25 @@ def on_radioButton_toggled(self):
 ------------------------------
 
 ## PRESSED
-[Volver arriba](#inicio)</sup>
+
+[Volver arriba](#inicio)</sup><br><br>
+La diferencia entre **pressed** y **clicked** es que el primero se activa tan pronto como se presiona el botón, mientras que **clicked** requiere tanto la presión como la liberación del botón para activarse.
+
+
 
 ----------------------------
-### MÉTODO QUE ME DEVUELVE EL ÍNDICE DE CADA TARJETA DEL QSTACKEDLAYOUT<br>
-Así, cuando pulse el botón me aparecerá el contenido de la tarjet[0]
+### MÉTODO QUE ME USA EL ÍNDICE DE CADA TARJETA DEL QSTACKEDLAYOUT<br>
+(ejemploQStackedLayout.py)<br>
+Así, cuando pulse el botón me aparecerá el contenido de la tarjeta[0]
 ```
 def on_btnRojo_pressed(self):
      self.tarjetas.setCurrentIndex(0)
 ```
+
 -----------------------------------------------
 
-### MÉTODO QUE AÑADE UNA TAREA A UNA QLISTVIEW
+### MÉTODO QUE AÑADE UNA TAREA A UNA QLISTVIEW DESDE UNA CAJA DE TEXTO
+(ejemploQListView2)
 ```
 def on_btnAgregarTarea_pressed(self):
     texto = self.txtTarea.text().strip() # Obtener el texto de la entrada y eliminar espacios (strip) al inicio y al final.
@@ -131,7 +156,7 @@ def on_btnAgregarTarea_pressed(self):
 ```
 Para empezar, **modelo** es un objeto que he creado de tipo QAbstractListModel, por lo que tiene métodos, señales... asociados a los que puedo llamar por herencia.<br><br>
 `texto = self.txtTarea.text().strip()`: Obtengo el texto escrito en la caja de texto y lo guardo en la variable texto. Con el **strip()** elimino posibles espacios en blanco
-que el user puede escribir al principio y al final y evitar errores.<br>
+que el user puede escribir al principio y al final y evitar errores.<br><br>
 `if texto`: si guardo algo en la variable texto haz lo siguiente:<br><br>
 `self.modelo.tareas.append((False, texto))`: uso el objeto *modelo* que instancié de QAbstractListModel, que contiene el modelo/la forma en la que va estructurada esta lista. Desde este objeto
 llamo al atributo *tareas*(método init) con el que accedo a *append* para añadir elementos al final de la lista siguiendo el modelo de creación de dicha lista que hice en el método *data* de la clase *TareasModelo(QAbstractListModel)*, poniendo que "por defecto" va a ser
@@ -139,11 +164,25 @@ False y que el texto es lo que obtengo de la caja de texto.<br><br>
 `self.modelo.layoutChanged.emit()`: Para actualizar la presentación de la lista y reflejar los cambios (añadir tarea, eliminar..)<br><br>
 `self.txtTarea.setText("")`: Limpiar el campo de entrada de la tarea después de agregarla
 
+----------------------------------------
+
+### MÉTODO QUE AÑADE UNA TAREA A UNA QLISTVIEW AL SELECCIONAR UN CHECK_BOX
+(examenFormulario.py)
+```
+def on_anadirLista_toggled(self):
+    if self.checkBox2.isChecked():
+       texto = self.checkBox2.text()
+       if texto:
+          self.modelo.musica.append(texto)
+          self.modelo.layoutChanged.emit()
+```
+
 -------------------------------------
 ### METODO QUE BORRA TAREA(S) DE LA QLISTVIEW 
+(ejemploQListView2)
 ```
    def on_btnBorrar_pressed(self):
-       indices = self.lstTareas.selectedIndexes()# Obtenemos los elementos que el user ha marcado
+       indices = self.lstTareas.selectedIndexes()# Obtenemos los elementos que el user ha marcado (devuelve una lista de objetos, no el índice)
        if indices: # Verifica si la lista "indices" está vacía o no con un True o False.
            for indice in sorted(indices, reverse=True): # Recorremos los indices en sentido inverso para evitar problemas al eliminar elementos. Así la va reccoriendo y guardando en índice el índice.
                 del self.modelo.tareas[indice.row()]# Borramos el elemento correspondiente al indice
@@ -162,6 +201,7 @@ se hace para evitar problemas a la hora de eliminar un elemento de la lista. As�
 -----------------------------------------
 
 ### MÉTODO QUE EDITA EL TEXTO DE UNA TAREA
+(ejemploQListView2)
 
     def on_editarLista_clicked(self):
         texto = self.txtCaja.text().strip()
@@ -178,6 +218,7 @@ se hace para evitar problemas a la hora de eliminar un elemento de la lista. As�
 
 
 ### MÉTODO QUE DICE SI TAREA SE HA HECHO O NO
+(ejemploQListView2)
 ```
 def on_btnHecho_pressed(self):
     indices = self.lstTareas.selectedIndexes()# Obtenemos los indices de los elementos seleccionados
@@ -205,14 +246,15 @@ def on_btnHecho_pressed(self):
 
 ---------------------------------------------
 
-## MÉTODO QUE DEVUELVE EL VALOR DEL SLIDER AL MOVERLO
+### MÉTODO QUE DEVUELVE EL VALOR DEL SLIDER AL MOVERLO
+(examenFormulario.py)
 ```
 sliderVolumen.valueChanged.connect(self.on_mostrarVolumen_slider)
 
 def on_mostrarVolumen_slider(self,valor):
     print("Valor del QSlider"+str(valor))
 ```
-Cuando el valor del QSlider cambia, se emitirá la señal **valueChanged**, y esta señal está conectada al método **on_mostrarVolumen_slider**. Como resultado, cada vez que el usuario mueva el control deslizante del volumen, se llamará automáticamente al método on_mostrarVolumen_slider con el nuevo valor del deslizador como argumento.
+Cuando el valor del QSlider cambia, se emitirá la señal **valueChanged**, y esta señal está conectada al método **on_mostrarVolumen_slider**. Como resultado, cada vez que el usuario mueva el control deslizante del volumen, se llamará automáticamente al método **on_mostrarVolumen_slider** con el nuevo valor del deslizador como argumento.
 
 -----------------------------------------------
 
@@ -221,7 +263,9 @@ Cuando el valor del QSlider cambia, se emitirá la señal **valueChanged**, y es
 [Volver arriba](#inicio)</sup>
 
 -------------------------------------------------
-## MÉTODO QUE DEVUELVE EL VALOR DEL SLIDER AL MOVERLO
+### MÉTODO QUE IMPRIME LO QUE SELECCIONO EN EL COMBOBOX<br>
+(examenFormulario.py)<br>
+En PyQt, la **señal activated** se emite cuando el usuario selecciona un elemento en el combo box.
 ```
 self.combo1 = QComboBox()
 self.combo1.addItems(["Britney","Lana","La Beyonsebe"])# Añado items al ComboBox
@@ -236,5 +280,81 @@ def on_mostrarComboBox_activated(self, index):
      print("Opción escogida "+str(opcion_escogida))
      print(f"Opcion escogida: {opcion_escogida}")
 ```
-La línea `self.combo1.activated.connect(self.on_mostrarComboBox_activated)` establece una conexión entre la señal activated del objeto **combo1** (un QComboBox) y el método `on_mostrarComboBox_activated` de la instancia actual de la clase.
-En PyQt, la **señal activated** se emite cuando el usuario selecciona un elemento en el combo box. Al conectar esta señal a un método, en este caso `on_mostrarComboBox_activated`, estás configurando la lógica que se ejecutará cuando el usuario marque una opción del combo.
+La línea `self.combo1.activated.connect(self.on_mostrarComboBox_activated)` establece una conexión entre la señal **activated** del objeto **combo1** (un QComboBox) y el método `on_mostrarComboBox_activated` de la instancia actual de la clase. Al conectar esta señal a un método, en este caso `on_mostrarComboBox_activated`, estás configurando la lógica que se ejecutará cuando el usuario marque una opción del combo.
+
+-------------------------------
+## OTROS
+
+[Volver arriba](#inicio)</sup>
+
+-------------------------------
+
+#### CLASE CON MÉTODOS PARA SUBIR Y BAJAR ELEMENTOS EN UNA LISTA DE TIPO QLISTWIDGET
+```
+from PyQt6.QtWidgets import QApplication, QMainWindow, QListWidget, QPushButton, QVBoxLayout, QWidget
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        # Crear instancias de los elementos de la interfaz
+        self.listaMusica = QListWidget(self)
+        self.btnSubir = QPushButton('Subir na lista', self)
+        self.btnBaixar = QPushButton('Baixar na lista', self)
+
+        # Crear el widget central
+        central_widget = QWidget(self)
+        self.setCentralWidget(central_widget)
+
+        # Configurar el diseño de la ventana
+        layout = QVBoxLayout(central_widget)
+        layout.addWidget(self.listaMusica)
+        layout.addWidget(self.btnSubir)
+        layout.addWidget(self.btnBaixar)
+
+        # Conectar botones a funciones correspondientes
+        self.btnSubir.clicked.connect(self.subirItem)
+        self.btnBaixar.clicked.connect(self.baixarItem)
+
+        # Agregar algunos elementos de ejemplo a la lista
+        self.listaMusica.addItems(['Canción 1', 'Canción 2', 'Canción 3'])
+
+    def subirItem(self):
+        # Obtener elementos seleccionados en la lista
+        item_seleccionado = self.listaMusica.selectedItems()
+        if item_seleccionado:
+            for item in item_seleccionado:
+                # Obtener el índice del elemento actual
+                index = self.listaMusica.row(item)
+                if index > 0:
+                    # Tomar y mover el elemento hacia arriba
+                    current_item = self.listaMusica.takeItem(index)
+                    self.listaMusica.insertItem(index - 1, current_item.text())
+                    self.listaMusica.setCurrentItem(current_item)
+                    # Emitir señal y deseleccionar
+                    self.modelo.layoutChanged.emit()
+                    self.listaMusica.clearSelection()
+
+    def baixarItem(self):
+        # Obtener elementos seleccionados en la lista
+        item_seleccionado = self.listaMusica.selectedItems()
+        if item_seleccionado:
+            for item in reversed(item_seleccionado):
+                # Obtener el índice del elemento actual
+                index = self.listaMusica.row(item)
+                if index < self.listaMusica.count() - 1:
+                    # Tomar y mover el elemento hacia abajo
+                    current_item = self.listaMusica.takeItem(index)
+                    self.listaMusica.insertItem(index + 1, current_item.text())
+                    self.listaMusica.setCurrentItem(current_item)
+                    # Emitir señal y deseleccionar
+                    self.modelo.layoutChanged.emit()
+                    self.listaMusica.clearSelection()
+
+if __name__ == '__main__':
+    app = QApplication([])
+    window = MainWindow()
+    window.show()
+    app.exec()
+
+```

@@ -1,5 +1,6 @@
 import sys
 
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget
 from PyQt6.QtGui import QPixmap
 
@@ -16,6 +17,7 @@ class PrimeraVentana(QMainWindow):
         botonSaludo.clicked.connect(self.on_botonSaludo_clicked)
 
         cajaVertical = QVBoxLayout()
+        cajaVertical.setAlignment(Qt.AlignmentFlag.AlignRight)
         cajaVertical.addWidget(self.lblEtiqueta1)
         cajaVertical.addWidget(lblEtiqueta2)
         cajaVertical.addWidget(botonSaludo)

@@ -47,14 +47,15 @@ boton.clicked.connect(self.on_btnSaludar_clicked)
 ```
 --------------------------
 **CHECK BOX**<br>
-En checkBox puedes activar y desactivar en este mismo, en cambio en radioButton, para
+En **checkBox** puedes activar y desactivar pulsando en este mismo. Sin embargo, en radioButton, para
 desactivar, por ejemplo, el A, tienes que pulsar el B.
 ```
 self.checkBox = QCheckBox ("Boton 1")
 self.checkBox.toggled.connect(self.on_chkBoton1_toggled)
 ```
 --------------------------
-**RADIO BUTTON**
+**RADIO BUTTON**<br>
+El *containerV2* simplemente hace referencia al layout en el que está metido. No tiene una función más allá que esa.
 ```
 self.radioButton = QRadioButton("Opción 1", containerV2)
 self.radioButton.toggled.connect (self.on_radioButton_toggled)
@@ -62,7 +63,7 @@ self.radioButton.toggled.connect (self.on_radioButton_toggled)
 --------------------------
 
 **COMBOBOX**<br>
-El combo box se considera Widget:<br>
+Es el desplegable. Se considera Widget:<br>
 ```
 combo = QComboBox() # Creo QComboBox
 grid.addWidget(combo,0,1,1,2)# Digo que el combo se va a añadir en la fila [0], columna[1], ocupando una fila y dos columnas
@@ -83,6 +84,7 @@ CAMBIAR TAMAÑO DE LA LISTA:
 lswLista.setFixedSize(300,200)
 ```
 CREAR LISTA: 
+Si pusiese `listaTareas =[]` no me saldría nada. Con `[None]`, al añadir una nueva tarea, me la pone como segunda, es decir, cuantifica como elemento vacío.
 ```
 listaTareas = [(True,"Primera tarea"),(False,"Segunda tarea")]# Creo ejemplo de lista siguiendo el modelo que quiero que siga dicha lista creado en el Data
 modelo = ModeloLista(listaTareas)  # Creo objeto QAbstractListModel con el ejemplo creado anteriormente. Lo guardo en una variable.
@@ -91,8 +93,8 @@ lista.setModel(modelo)# Añado el modelo al objeto QListView
 cajaV1.addWidget(lista)# Añado el widget recién creado a la caja vertical
 ```
 
-``listaTareas = [(True,"Primera tarea"),(False,"Segunda tarea")]``: Cada elemento de la lista será una tupla que contiene dos elementos(Booleano y String). Podría haberlo dejado vacío, ahora va a salir de forma predeterminada.
-estas dos tareas.
+``listaTareas = [(True,"Primera tarea"),(False,"Segunda tarea")]``: Cada elemento de la lista será una tupla que contiene dos elementos(Booleano y String). Podría haberlo dejado vacío pero de esta manera saldrán estas dos tareas de forma predeterminada.<br>
+Uso **lista.setModel(modelo)** para añadir el modelo que quiero usar en la lista.
 
 ----------------------------
 
@@ -113,9 +115,12 @@ caixaH2.addWidget(frame) # Añado a otro layout el marco con la caja dentro
 El groupBox es como el **Frame** pero puedes añadir un título.<br>
 También se considera **Widget**.
 ```
-frame = QGroupBox("Opcións de reproducción") # Creo marcon con titulo
-frame.setLayout(caixa5) # Añado el layout (caixa5) al marco
-caixaH2.addWidget(frame) # Añado a otro layout el marco con la caja dentro
+groupBox = QGroupBox("Opcion de reproduccion")# Creo QGroupBox
+cajaH2.addWidget(groupBox)# Lo añado a la caja horizontal
+grid2 = QGridLayout()# Creo layout (en este caso, grid) para añadirlo al groupBox
+groupBox.setLayout(grid2)# Añado el layout al groupBox
+self.checkBoton2 = QCheckBox("Asincrono")# Creo botón (widget)
+grid2.addWidget(self.checkBoton2,0,0,1,1)# Añado el widget al grid
 ```
 
 ----------------------------
@@ -132,7 +137,7 @@ tabs.setMovable(True)# Para que el usuario pueda cambiar el orden de las pestañ
 
 miTupla = ("red", "green", "blue", "yellow")
 for color in miTupla:
-   tabs.addTab(CajaColor(color), color) # Agrega pestaña al QTabWidget con el contenido de cajaColor(Color)
+   tabs.addTab(CajaColor(color), color) # Agrega pestaña al QTabWidget con el contenido de CajaColor(Color), un widget, y el texto que aparecerá.
 ```
 Al final de todo no haría falta meterlo en un container, porque esta ya es en sí un widget. Sería:
 ```
@@ -142,8 +147,7 @@ self.show()
 ------------------------------
 
 #### CONTENEDOR PRINCIPAL
-La QMainWindow se considera Widget. Así, cuando hago el `self.setCentralWidget(container)` es añadir
-el contenedor(Widget), que es el conjunto de cajas/layouts ordenados, en el widget de la
+La QMainWindow se considera Widget. Así, cuando hago el `self.setCentralWidget(container)` añado el contenedor(Widget), que es el conjunto de cajas/layouts ordenados, en el widget de la
 QMainWindow.
 ```
 container = QWidget() # Creo contenedor
@@ -170,7 +174,7 @@ cajaV.addWidget(self.txtCaja)
 ```
 ---------------------------
 **QHBOXLAYOUT**<br>
-Añado los widgets creados (etiquetas, botones..) a un layout (distribuidor de widgets). En este caso, uno que me los ordena de forma vertical, unos debajo de otros.
+Añado los widgets creados (etiquetas, botones..) a un layout (distribuidor de widgets). En este caso, uno que me los ordena de forma horizontal, unos debajo de otros.
 ```
 cajaH = QHBoxLayout()
 cajaH.addWidget(etiqueta) 
@@ -204,8 +208,8 @@ widgetBox = QWidget()
 widgetBox.setLayout(HBoxModificado())
 self.tarjetas.addWidget(widgetBox)
 ```
-Primero creas el obeto tipo QWidget. Añades la caja horizontal (HBoxModificado()), llevas
-los **paréntesis ()** porque estoy llamando ana clase/método que me devuelve dicha
+Primero creas el obeto tipo QWidget. Añades la caja horizontal (HBoxModificado()), lleva
+los **paréntesis ()** porque estoy llamando a una clase/método que me devuelve dicha
 caja horizontal, sino iría sin paréntesis, como siempre.
 Por último, añades dicho widget(el cual contiene la caja horizontal)a la tarjeta.
 ```
@@ -213,7 +217,7 @@ self.tarjetas.setCurrentIndex(0)
 ```
 
 El `self.tarjetas.setCurrentIndex(0)`indica la referencia de la tarjeta. Esta referencia se obtiene
-del índice de cada una. Este índice se asocia a la tarjeta según el órden de escritura del código tras añadir
+del índice de cada una. Este índice se asocia a la tarjeta según el orden de escritura del código tras añadir
 los widgets a la tarjeta (`self.tarjetas.addWidget(widgetBox)`).
 ------------------------------------
 
@@ -274,7 +278,7 @@ class CajaColor(QWidget):
     def __init__(self,color):# Inicializo con un constructor que recibirá por parámetro un color
         super().__init__()
         self.setAutoFillBackground(True) # Rellenar el fondo de un color
-        paleta = self.palette() # Obtiene la paleta de colores actual asociada al widget (QWidget en este caso(QMinWindow es un Widget también).
+        paleta = self.palette() # Obtiene la paleta de colores actual asociada al widget QWidget(QMinWindow es un Widget también).
         paleta.setColor(QPalette.ColorRole.Window, QColor(color))# Establezco el color de fondo de la ventana
         self.setPalette(paleta)#  Aplica la paleta de colores actualizada al widget, lo que incluye el nuevo color de fondo configurado.
 ```
@@ -287,6 +291,7 @@ el self y el color. Entonces, cuando llame a dicha clase tengo que escribir el c
 -----------------------------------
 
 ### MÉTODO DATA DE EJEMPLOQLISTVIEW
+Obligatorio usar el `def rowCount(self,indice)` aunque no lo utilice. En caso contrario, no funciona.
 ```
 def data(self, indice, rol):
 
@@ -299,14 +304,18 @@ def data(self, indice, rol):
         #Barrabaja es porque decimos que vamos a trabajar con una tupla de dos elementos pero que solo vamos a trabajar con uno, en este caso, el estado.
         if estado:# es como decir if estado is True:
            return tickImage
+
+# SI NO LO PONGO NO FUNCIONA LA LISTA          
+def rowCount(self, indice):
+     return len(self.tareas)
 ```
 
 `def data(self, indice, rol):` : Es un metodo que heredo de la clase padre QAbstractListModel, la cual recibe por parámetros un indice y un rol.
 <br> El **indice** representa la posición de un item(empieza desde cero)
 y el **rol** indica el tipo de datos que se está solicitando para el item en el índice dado:
 - Texto Visible: *Qt.ItemDataRole.DisplayRole*
-- Texto para edición: *Qt.ItemDataRole.EditRole*
 - Icono: *Qt.ItemDataRole.DecorationRole*
+- Texto para edición: *Qt.ItemDataRole.EditRole* (este iría dentro de un método distinto, el **setData**)
 <br>
 
 ` if (rol == Qt.ItemDataRole.DisplayRole):`: En caso de que el rol
@@ -317,15 +326,16 @@ Se asume que cada elemento es una tupla con al menos dos elementos: un estado y 
 
 `return texto:` Devuelve el texto de la tarea. En este contexto, significa que cuando se solicita el dato para la visualización de un ítem, se proporciona el texto asociado con ese ítem.
 
+---------------------------------
+### MÉTODO ROWCOUNT()
 ```
-   def rowCount(self, indice):
-       return len(self.tareas)
+def rowCount(self, indice):
+    return len(self.tareas)
 ```
-Este método nos dice el número total de filas, es decir, de items(en este caso, tareas).
+Es **OBLIGATORIO**. Nos dice el número total de filas, es decir, de items(en este caso, tareas).
 Es un método abstracto e interno, es decir, aunque yo no lo use como tal, cuando uso el 
-QListView() para llamar al modelo, sepa con qué trabaja y cómo hacerlo. EN este caso, necesita
-contar las filas. Si en vez de una lista estuviese trabajando con una base de datos, usaría otra
-función.
+QListView() para llamar al modelo, se utiliza para que sepa con qué trabajar y cómo hacerlo. En este caso, necesita
+contar las filas. Si en vez de una lista estuviese trabajando con una base de datos, usaría otra función.
 
 ----------------------------------------------
 
