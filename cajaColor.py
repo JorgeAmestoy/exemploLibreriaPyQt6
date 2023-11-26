@@ -9,9 +9,10 @@ class CajaColor(QWidget):
     def __init__(self,color):
         super().__init__()
         self.setAutoFillBackground(True) # Rellenar el fondo de un color
-        paleta = self.palette()
-        paleta.setColor(QPalette.ColorRole.Window, QColor(color))
-        self.setPalette(paleta)
+        paleta = self.palette() # Obtiene la paleta de colores actual asociada al widget (QMainWindow en este caso).
+        paleta.setColor(QPalette.ColorRole.Window, QColor(color))# Establezco el color de fondo de la ventana
+        self.setPalette(paleta)#  Aplica la paleta de colores actualizada al widget, lo que incluye el nuevo color de fondo configurado.
+
 
 class VentanaPrincipal(QMainWindow):
     def __init__(self):

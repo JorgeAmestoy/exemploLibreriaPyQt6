@@ -56,8 +56,8 @@ self.checkBox.toggled.connect(self.on_chkBoton1_toggled)
 --------------------------
 **RADIO BUTTON**
 ```
-self.rbtRadioButton1 = QRadioButton("Opción 1", containerV2)
-self.rbtRadioButton1.toggled.connect (self.on_rbtRadioButton1_toggled)
+self.radioButton = QRadioButton("Opción 1", containerV2)
+self.radioButton.toggled.connect (self.on_radioButton_toggled)
 ```
 --------------------------
 
@@ -90,6 +90,63 @@ cajaV.addWidget(lstTareas)# Añado el QListView al layout vertical
 ```
 ----------------------------
 
+#### QFRAME <br>
+El frame se considera **Widget**:
+
+```
+frame = QFrame() # Creo marco
+frame.setFrameStyle(QFrame.Shape.Box) # Establezco la forma del marco en rectángulo
+frame.setLayout(caixa5) # Añado el layout horizontal (caixa5) al marco
+frame.setWindowTitle("Opcións de reproducción") # Pongo supuesto título del marco
+caixaH2.addWidget(frame) # Añado a otro layout el marco con la caja dentro
+```
+
+------------------------------
+
+#### QGROUPBOX<br>
+El groupBox es como el **Frame** pero puedes añadir un título.<br>
+También se considera **Widget**.
+```
+frame = QGroupBox("Opcións de reproducción") # Creo marcon con titulo
+frame.setLayout(caixa5) # Añado el layout (caixa5) al marco
+caixaH2.addWidget(frame) # Añado a otro layout el marco con la caja dentro
+```
+
+----------------------------
+
+#### QTABWIDGET
+Los tabs son las pestañas. Para añadirlas usamos: `.addTab()`.<br>
+Así, en la firma del método (o en el error al ejecutar), me pone que es obligatorio pasar como parámetros
+un widget y un String de forma **Optional**, por lo que en caso de no usarlo debemos escribir
+**None**. Este String es el nombre que aparecerá en cada pestaña.
+```
+tabs = QTabWidget()
+tabs.setTabPosition(QTabWidget.TabPosition.South)# Las coloca en la parte inferior
+tabs.setMovable(True)# Para que el usuario pueda cambiar el orden de las pestañas arrastrándolas en la propia interfaz.
+
+miTupla = ("red", "green", "blue", "yellow")
+for color in miTupla:
+   tabs.addTab(CajaColor(color), color) # Agrega pestaña al QTabWidget con el contenido de cajaColor(Color)
+```
+Al final de todo no haría falta meterlo en un container, porque esta ya es en sí un widget. Sería:
+```
+self.setCentralWidget(tabs)
+self.show()
+```
+------------------------------
+
+#### CONTENEDOR PRINCIPAL
+La QMainWindow se considera Widget. Así, cuando hago el `self.setCentralWidget(container)` es añadir
+el contenedor(Widget), que es el conjunto de cajas/layouts ordenados, en el widget de la
+QMainWindow.
+```
+container = QWidget() # Creo contenedor
+container.setLayout(cajaVertical) # Añado un layout al contenedor
+self.setCentralWidget(container) # Añado el contenedor (widget) con todos los layouts ordenados al widget de la Main para mostrar
+```
+
+-------------------------------------
+
 
 ## LAYOUTS
 
@@ -99,47 +156,26 @@ cajaV.addWidget(lstTareas)# Añado el QListView al layout vertical
 **QVBOXLAYOUT**<br>
 Añado los widgets creados (etiquetas, botones..) a un layout (distribuidor de widgets). En este caso, uno que me los ordena de forma vertical, unos debajo de otros.
 ```
-# SI AÑADO A LA CAJA UN CONTENEDOR .addWidget, si añado una caja .addLayout
-cajaVertical = QVBoxLayout() #Creo caja vertical
-cajaVertical.addWidget(etiqueta) # Añado etiqueta a la caja
-cajaVertical.addWidget(etiqueta2) # Añado otra etiqueta a la caja
-cajaVertical.addWidget(boton) # Añado botón a la caja
-cajaVertical.addWidget(self.txtCaja) # Añado botón a la caja
+cajaV = QVBoxLayout()
+cajaV.addWidget(etiqueta) 
+cajaV.addWidget(etiqueta2) 
+cajaV.addWidget(boton)
+cajaV.addWidget(self.txtCaja)
 # PONER EL SELF SI LO VOY A USAR EN LA FUNCIÓN!!!
 ```
 ---------------------------
 **QHBOXLAYOUT**<br>
 Añado los widgets creados (etiquetas, botones..) a un layout (distribuidor de widgets). En este caso, uno que me los ordena de forma vertical, unos debajo de otros.
 ```
-cajaHorizontal = QHBoxLayout() #Creo caja Horizontal
-cajaHorizontal.addWidget(etiqueta) # Añado etiqueta a la caja
-cajaHorizontal.addWidget(etiqueta2) # Añado otra etiqueta a la caja
-cajaHorizontal.addWidget(boton) # Añado botón a la caja
-cajaHorizontal.addWidget(self.txtCaja) # Añado botón a la caja
+cajaH = QHBoxLayout()
+cajaH.addWidget(etiqueta) 
+cajaH.addWidget(etiqueta2) 
+cajaH.addWidget(boton)
+cajaH.addWidget(self.txtCaja) 
 # PONER EL SELF SI LO VOY A USAR EL BOTÓN, CAJA DE ENTRADA... EN LA FUNCIÓN!!!
 ```
 ---------------------------
 
-#### QGROUPBOX<br>
-El groupBox se considera Widget:
-```
-frame = QGroupBox("Opcións de reproducción") # Creo marcon con titulo
-frame.setLayout(caixa5) # Añado el layout (caixa5) al marco
-caixaH2.addWidget(frame) # Añado a otro layout el marco con la caja dentro
-```
-
-----------------------------
-
-#### QFRAME <br>
-El frame se considera Widget:
-
-```
-frame = QFrame() # Creo marco
-frame.setFrameStyle(QFrame.Shape.Box) # Establezco la forma del marco en rectángulo
-frame.setLayout(caixa5) # Añado el layout horizontal (caixa5) al marco
-frame.setWindowTitle("Opcións de reproducción") # Pongo supuesto título del marco
-caixaH2.addWidget(frame) # Añado a otro layout el marco con la caja dentro
-```
 **QGRIDLAYOUT** (ejemploGridLayout)
 ```
 grid = QGridLayout()
@@ -150,7 +186,8 @@ grid.addWidget(boton,2,0,1,2)
 ------------------------------------
 
 **QSTACKEDLAYOUT**(ejemploQStackedLayout)<br>
-La tarjeta es lo que va a cambiar dependiendo del botón al que pulse.
+La tarjeta es lo que va a cambiar dependiendo del botón al que pulse.<br>
+Se consideran Layouts.
 ```
 self.tarjetas = QStackedLayout()
 cajaVertical.addLayout(self.tarjetas)
@@ -175,40 +212,13 @@ del índice de cada una. Este índice se asocia a la tarjeta según el órden de
 los widgets a la tarjeta (`self.tarjetas.addWidget(widgetBox)`).
 ------------------------------------
 
-#### QTABWIDGET
-```
-tabs = QTabWidget()
-tabs.setTabPosition(QTabWidget.TabPosition.South)# Las coloca en la parte inferior
-tabs.setMovable(True)# Para que el usuario pueda cambiar el orden de las pestañas arrastrándolas en la propia interfaz.
-for color in miTupla:
-   tabs.addTab(CajaColor(color), color) # Agrega pestaña al QTabWidget con el contenido de cajaColor(Color)
-```
-Al final de todo no haría falta meterlo en un container, porque esta ya es en sí,
-un widget. Sería:
-```
-self.setCentralWidget(tabs)
-self.show()
-```
-------------------------------
-
-**CONTENEDOR**<br>
-Añado el layout(cajaVertical) al contenedor final, es decir, al Widget base de la ventana, sobre el que va a estar todo el contenido(layouts, botones..)
-```
-container = QWidget() # Creo contenedor
-container.setLayout(cajaVertical) # Añado un layout al contenedor
-self.setCentralWidget(container) # Mostrar el contenedor y su contenido en el área central de la ventana
-```
-Sin el `self.setCentralWidget(container)` no se vería en la ventana todo lo que he metido en ella al ejecutar.
-El contenedor es de tipo Widget.
-
--------------------------------------
 
 ## PERSONALIZAR
 
 [Volver arriba](#inicio)</sup>
 
 --------------------------------
-ESTABLECER EL NOMBRE DE LA VENTANA PRINCIPAL
+#### ESTABLECER EL NOMBRE DE LA VENTANA PRINCIPAL
 ```
 self.setWindowTitle("Mi primera aplicacion")
 ```
@@ -256,17 +266,15 @@ tabs.setTabPosition(QTabWidget.TabPosition.South)
 **MÉTODO INIT DE CAJACOLOR**
 ```
 class CajaColor(QWidget):
-    def __init__(self,color):
+    def __init__(self,color):# Inicializo con un constructor que recibirá por parámetro un color
         super().__init__()
         self.setAutoFillBackground(True) # Rellenar el fondo de un color
-        paleta = self.palette()
-        paleta.setColor(QPalette.ColorRole.Window, QColor(color))
-        self.setPalette(paleta)
+        paleta = self.palette() # Obtiene la paleta de colores actual asociada al widget (QWidget en este caso(QMinWindow es un Widget también).
+        paleta.setColor(QPalette.ColorRole.Window, QColor(color))# Establezco el color de fondo de la ventana
+        self.setPalette(paleta)#  Aplica la paleta de colores actualizada al widget, lo que incluye el nuevo color de fondo configurado.
 ```
-En esta clase, creo en el método init una función para poder colorear
-los layouts(QVBox, GridLayout...).
-Para usarlo lo hago así: `cajaV.addWidget(CajaColor("red"))`. Estoy utilizando
-la clase CajaColor como si fuese un widget, ya que al CajaColor heredar de la súper clase
+`cajaV.addWidget(CajaColor("red"))`. Estoy utilizando
+la clase CajaColor como si fuese un widget, ya que al CajaColor hereda de la súper clase
 **QWidget** y al crear una instancia, estoy obteniendo un objeto que se comporta como un widget.
 Luego, en `paleta.setColor(QPalette.ColorRole.Window, QColor(color))` digo que el color que voy añadir en la paleta
 será en que escriba en la instancia del objeto de esta clase, pues en el constructor puse como parámetros

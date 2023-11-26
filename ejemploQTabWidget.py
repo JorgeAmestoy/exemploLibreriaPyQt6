@@ -51,16 +51,18 @@ class VentanaPrincipal (QMainWindow):
         tabs.setTabPosition(QTabWidget.TabPosition.South)
         tabs.setMovable(True)
 
-
-        miTupla = ("red", "green", "blue", "yellow")
+        # AÑADO 3 PESTAÑAS
+        miTupla = ("red", "green", "blue")
         #Recorro tupla para no tener que añadir color a color
         for color in miTupla:
           tabs.addTab(CajaColor(color), color)
 
+        # AÑADO 4º PESTAÑA SIN NOMBRE
         widgetGrid = QWidget()
         widgetGrid.setLayout(GridConContenido())
-        tabs.addTab(widgetGrid, "Widget")
+        tabs.addTab(widgetGrid, None)
 
+        # AÑADO 5º PESTAÑA
         widgetHorizontal = QWidget()
         widgetHorizontal.setLayout(boxHorizontalColores())
         tabs.addTab(widgetHorizontal, "Box Horizontal")

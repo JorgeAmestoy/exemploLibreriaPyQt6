@@ -111,7 +111,9 @@ def __init__(self, nombre: [str]):
 ```
 -------------------------------
 <br>
-Aquí digo que va a recibir de manera opcional el parámetro. Si no lo uso, cuando haga la instancia tengo que escribir None.
+
+#### OPTIONAL <br>
+Aquí digo que va a recibir de manera opcional el parámetro. Si no lo uso, cuando haga la instancia tengo que escribir **None.**
 
 ```
 def __init__(self, nombre: Optional[str]):
@@ -159,6 +161,12 @@ print(palabras_ordenadas)
 Por lo tanto, **key=len** especifica que la longitud de cada cadena (len) debe usarse como criterio para la ordenación. **Reverse** no se proporciona, por lo que la ordenación es en orden ascendente (longitudes más cortas primero).
 
 ---------------------------------
+
+## PRINT
+
+
+
+------------------------------------
 
 ## TUPLAS
 ```

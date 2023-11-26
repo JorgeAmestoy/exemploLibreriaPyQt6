@@ -65,12 +65,12 @@ def on_txtCaja_enter(self):
 ```
 --------------------------------------------
 
-## TOGGLED 
+## TOGGLED
 [Volver arriba](#inicio)</sup>
 
 ---------------------------------------------
 ### MÉTODO QUE AL PULSAR CHECK_BOX IMPRIME POR PANTALLA QUÉ BOTÓN SE HA SELECCIONADO Y DESELECCIONADO(ejemploCheckboxRadio.py)<br>
-Aquí usamos el método isChecked() del checkBox para realizar algo en caso de que se haya seleccionado dicho botón
+Aquí usamos el método **isChecked()** del checkBox para realizar algo en caso de que se haya seleccionado dicho botón
 ```
 #EN LA LLAMADA AL MÉTODO NO SE PONEN PARÉNTESIS
 #PONER SELF 

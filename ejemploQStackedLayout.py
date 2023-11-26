@@ -24,7 +24,7 @@ class GridConContenido(QGridLayout):
 
 # Clase que hereda de la super clase QHBoxLayout y que me devuelve un grid con widgets que solo son colores.
 # Trabajo con el self porque ya estoy trabajando directamente con un objeto de tipo QHBoxLayout.
-class boxHorizontalColores(QHBoxLayout):
+class Boxhorizontalcolores(QHBoxLayout):
     def __init__(self):
         super().__init__()
 
@@ -36,8 +36,7 @@ class boxHorizontalColores(QHBoxLayout):
         caja2.addWidget(CajaColor("red"))
         caja2.addWidget(CajaColor("yellow"))
         caja2.addWidget(CajaColor("purple"))
-        self.addLayout(
-            caja2)  # Como estamos heredando de QHboxLayout, el cual nos devuelve un objeto de tipo Caja Horizontal, el self hace referencia a esta misma caja horizontal. Así, añado la caja vertical al self caja horizontal
+        self.addLayout(caja2)  # Como estamos heredando de QHboxLayout, el cual nos devuelve un objeto de tipo Caja Horizontal, el self hace referencia a esta misma caja horizontal. Así, añado la caja vertical al self caja horizontal
 
         # Añado el contenido (widgets) a la caja vertical 3
         caja3.addWidget(CajaColor("blue"))
@@ -86,7 +85,7 @@ class VentanaPrincipal(QMainWindow):
 
         # Creo widget en el que añado la caja horizontal de colores, la cual será el contenido de la tarjeta [3]
         widgetCajaH = QWidget()
-        widgetCajaH.setLayout(boxHorizontalColores())
+        widgetCajaH.setLayout(Boxhorizontalcolores())
         self.tarjetas.addWidget(widgetCajaH)
 
         container = QWidget()

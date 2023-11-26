@@ -14,12 +14,12 @@ class VentanaPrincipal (QMainWindow):
 
         grid = QGridLayout()
 
-        grid.addWidget(CajaColor("red"),0,0,1,1)
+        grid.addWidget(CajaColor("red"),0,0)
         grid.addWidget(CajaColor("green"),1,0,2,1)
-        grid.addWidget(CajaColor("blue"), 0, 1, 1, 2)
-        grid.addWidget(CajaColor("pink"), 1, 1, 1, 2)
-        grid.addWidget(CajaColor("orange"), 2, 1, 1, 1)
-        grid.addWidget(CajaColor("yellow"), 2, 2, 1, 1)
+        grid.addWidget(CajaColor("blue"),0,1,1,2)
+        grid.addWidget(CajaColor("pink"),1,1,1,2 )
+        grid.addWidget(CajaColor("orange"),2,1,1,1 )
+        grid.addWidget(CajaColor("yellow"),2,2,1,1 )
 
 
 
