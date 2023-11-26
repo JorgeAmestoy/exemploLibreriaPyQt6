@@ -1,6 +1,22 @@
 <p align="center"><b><font size="7">EXPLICACIONES BÁSICAS PYTHON</font></b></p>
 
+# INICIO
+
+[LIBRERÍAS](#librerias) <br>
+[DEFINICIÓN DE CLASE](#definicion-de-clase)<br>
+[SELF](#self)<br>
+[FIRMAS DE MÉTODOS](#firmas-de-metodos)<br>
+[TUPLAS](#tuplas)<br>
+[ENUMERATE](#enumerate)<br>
+[FOR IN](#for-in)
+
 --------------------------
+
+
+## LIBRERIAS
+
+
+--------------
 ```
 from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
@@ -22,7 +38,10 @@ window.show()
 **IMPORTANTE**: Este método es para mostrar la ventana principal. Si no lo usamos **no** se ve nada.
 
 -----------------------
-**DEFINICIÓN DE CLASE**
+
+## DEFINICION DE CLASE
+
+[Volver arriba](#inicio)</sup>
 
 ```
 class Persona:
@@ -55,7 +74,7 @@ persona2 = Persona("María")
 En este caso la **edad** es opcional, si creo una instancia de Persona sin la edad no daría error.
 
 ---------------------
-**CONSTRUCTOR DE LA CLASE Y SÚPER CLASE DE LA MAIN**
+### CONSTRUCTOR DE LA CLASE Y SÚPER CLASE 
 ```
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -69,7 +88,10 @@ del constructor.**
 
 -----------------------
 
-**SELF**<br>
+### SELF
+
+[Volver arriba](#inicio)</sup>
+
 El self en Python se refiere a la instancia actual de la clase. Puedes pensar en él como una forma de referirte a sí mismo dentro de los métodos de una clase.
 
 Cuando defines una clase en Python y creas un objeto (una instancia) de esa clase, el self se refiere a ese objeto específico. Dentro de los métodos de la clase, puedes usar self para acceder a los atributos y métodos de esa instancia particular.
@@ -94,14 +116,9 @@ En resumen, digo que la edad que pase luego como argumento, sea la edad de la in
 
 ----------------------
 
-### MÉTODO SHOW<br>
-Puedo llamar al método *show()* o bien, dentro del
-constructor de la ventana principal con `self.show()`,
-o fuera de la clase con el objeto/variable llamado *ventana*, en la que creo una instancia de dicha clase
-y al heredar de QMainWindow puedo usar el método *show()*.
+## FIRMAS DE METODOS
 
----------------------------
-### FIRMAS DE MÉTODOS
+[Volver arriba](#inicio)</sup><br>
 Posicionando el cursor sobre métodos heredados de otras clases nos enseña detalles sobre este. Por ejemplo:<br>
 
 Aquí digo que el método va a recibir obligatoriamente una variable de tipo String.
@@ -110,7 +127,6 @@ Aquí digo que el método va a recibir obligatoriamente una variable de tipo Str
 def __init__(self, nombre: [str]):
 ```
 -------------------------------
-<br>
 
 #### OPTIONAL <br>
 Aquí digo que va a recibir de manera opcional el parámetro. Si no lo uso, cuando haga la instancia tengo que escribir **None.**
@@ -125,9 +141,8 @@ objeto_con_nombre.saludar()
 objeto_sin_nombre = Ejemplo(nombre=None)
 objeto_sin_nombre.saludar()
 ```
-
 -------------------------
-<br>
+#### NONE
 Aquí pido por parámetro una variable de cualquier tipo y de uso opcional:
 
 ```
@@ -142,8 +157,8 @@ Por lo tanto, este método va a recibir como parámetro una variable.<br>
 **-> int:** significa que dicho método nos va a devolver un int.<br>
 Así, aunque al trabajar en el método nos lo use, hay que escribirlos en la definición de este.<br> <br>
 -------------------------
-<br>
 
+#### SORTED
 El término iterable en este contexto se utiliza para indicar que se espera cualquier tipo de objeto que sea iterable. Con la barra indico que las siguientes palabras serán **palabras clave**. Key será opcional
 y el reverse si no se especifica que va a ser True, será False por defecto.
 ```
@@ -162,13 +177,20 @@ Por lo tanto, **key=len** especifica que la longitud de cada cadena (len) debe u
 
 ---------------------------------
 
-## PRINT
+## MÉTODO SHOW<br>
 
+[Volver arriba](#inicio)</sup><br>
+Puedo llamar al método *show()* o bien, dentro del
+constructor de la ventana principal con `self.show()`,
+o fuera de la clase con el objeto/variable llamado *ventana*, en la que creo una instancia de dicha clase
+y al heredar de QMainWindow puedo usar el método *show()*.
 
 
 ------------------------------------
 
 ## TUPLAS
+
+[Volver arriba](#inicio)</sup>
 ```
 # Definir una tupla
 mi_tupla = (1, 'Hola', 3.14)
@@ -190,7 +212,7 @@ for elemento in mi_tupla:
 
 ```
 
-**LISTA vs TUPLA**
+### LISTA vs TUPLA
 ```
 mi_tupla = (1, 'dos', 3.0)
 
@@ -201,8 +223,10 @@ no puedo modificar su contenido.
 
 ----------------------------------
 
-#### ENUMERATE
-Es una función que itera sobre una lista/tupla y nos retorna una tupla con el índice y el valor de los elementos
+## ENUMERATE
+
+[Volver arriba](#inicio)</sup><br>
+Es una función que itera sobre una **lista/tupla** y nos retorna una tupla con el índice y el valor de los elementos
 ```
 frutas = ['manzana', 'plátano', 'uva']# Creo una lista
 
@@ -218,7 +242,9 @@ DANDO COMO SALIDA:
 ```
 --------------------------------
 
-**FOR IN**<br>
+## FOR IN
+
+[Volver arriba](#inicio)</sup>
 ```
 if indices:
     for indice in indices:

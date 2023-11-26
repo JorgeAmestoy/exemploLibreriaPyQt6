@@ -44,24 +44,18 @@ class VentanaPrincipal(QMainWindow):
        super().__init__()
 
 
-       # Titulo de la ventana
+
        self.setWindowTitle("Ejemplo QListView con Qt")
 
 
-       # Creo una instancia de TareasModelo. Es como si dijese: int numero = 2; Y luego llamo a la clase y meto el numero.
-       listaTareas = [(True, 'Primera tarea'), (False, 'Segunda tarea')]# El false es el estado, lo otro es el texto. Podria haberlo dejaod vacio, estas van a salir siempre, añado una tarea nueva o no
-       # Hago una instancia llamada modelo, de la clase TareasModelo, la cual tiene una lista cuyos elementos están formados por una tupla que me dice el estado y el texto
-       self.modelo = TareasModelo(listaTareas)#
+       listaTareas = [(True, 'Primera tarea'), (False, 'Segunda tarea')]
 
 
-       # Creo un layout de tipo Vertical
+
        cajaV = QVBoxLayout()
-
-
-       # Configuración de la vista de lista y asignación del modelo
-       self.lstTareas = QListView()# LE PONGO EL SELF PORQUE LO USO EN EL METODO DE ABAJO DE BTNBORRAR
-       self.lstTareas.setModel(self.modelo)# Añado el modelo para que la QListView sepa cómo va a ser esta, qué datos mostrar..
-       self.lstTareas.setSelectionMode(QListView.SelectionMode.MultiSelection) # Para poder seleccionar varias tareas (items). Hay que seleccionar en orden de abarjo para arriba.
+       self.lstTareas = QListView()
+       self.lstTareas.setModel(self.modelo)
+       self.lstTareas.setSelectionMode(QListView.SelectionMode.MultiSelection) # Para poder seleccionar varias tareas (items). Hay que seleccionar en orden de abajo para arriba.
        cajaV.addWidget(self.lstTareas)# Añado el QListView al layout vertical
 
 

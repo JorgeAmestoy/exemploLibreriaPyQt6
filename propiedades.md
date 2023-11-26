@@ -84,10 +84,16 @@ lswLista.setFixedSize(300,200)
 ```
 CREAR LISTA: 
 ```
-lstTareas = QListView() # Creo objeto tipo QListView
-lstTareas.setModel(self.modelo) # Añado el modelo que he creado de lista (su forma, qué va a mostrar...)
-cajaV.addWidget(lstTareas)# Añado el QListView al layout vertical
+listaTareas = [(True,"Primera tarea"),(False,"Segunda tarea")]# Creo ejemplo de lista siguiendo el modelo que quiero que siga dicha lista creado en el Data
+modelo = ModeloLista(listaTareas)  # Creo objeto QAbstractListModel con el ejemplo creado anteriormente. Lo guardo en una variable.
+lista = QListView()# Creo objeto QListView
+lista.setModel(modelo)# Añado el modelo al objeto QListView
+cajaV1.addWidget(lista)# Añado el widget recién creado a la caja vertical
 ```
+
+``listaTareas = [(True,"Primera tarea"),(False,"Segunda tarea")]``: Cada elemento de la lista será una tupla que contiene dos elementos(Booleano y String). Podría haberlo dejado vacío, ahora va a salir de forma predeterminada.
+estas dos tareas.
+
 ----------------------------
 
 #### QFRAME <br>
@@ -146,7 +152,6 @@ self.setCentralWidget(container) # Añado el contenedor (widget) con todos los l
 ```
 
 -------------------------------------
-
 
 ## LAYOUTS
 
@@ -263,7 +268,7 @@ tabs.setTabPosition(QTabWidget.TabPosition.South)
 
 ---------------------------------------
 
-**MÉTODO INIT DE CAJACOLOR**
+### MÉTODO INIT DE CAJACOLOR
 ```
 class CajaColor(QWidget):
     def __init__(self,color):# Inicializo con un constructor que recibirá por parámetro un color
@@ -297,8 +302,8 @@ def data(self, indice, rol):
 ```
 
 `def data(self, indice, rol):` : Es un metodo que heredo de la clase padre QAbstractListModel, la cual recibe por parámetros un indice y un rol.
-<br> El *indice* representa la posición de un item(empieza desde cero)
-y el *rol* indica el tipo de datos que se está solicitando para el item en el índice dado:
+<br> El **indice** representa la posición de un item(empieza desde cero)
+y el **rol** indica el tipo de datos que se está solicitando para el item en el índice dado:
 - Texto Visible: *Qt.ItemDataRole.DisplayRole*
 - Texto para edición: *Qt.ItemDataRole.EditRole*
 - Icono: *Qt.ItemDataRole.DecorationRole*

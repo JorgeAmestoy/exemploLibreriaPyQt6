@@ -124,13 +124,13 @@ def on_btnRojo_pressed(self):
 ```
 def on_btnAgregarTarea_pressed(self):
     texto = self.txtTarea.text().strip() # Obtener el texto de la entrada y eliminar espacios (strip) al inicio y al final.
-    if texto: # Si obtengo algo de la caja de texto..:
+    if texto: Verifica si la lista "texto" está vacía o no con un True o False. 
         self.modelo.tareas.append((False, texto)) # Agrega una nueva tarea al modelo con una marca de no completado (False) y el texto ingresado (la tupla). Append añade elemento(s) al final de la lista. Agrega una nueva tarea al modelo (que es la lista de tareas) y la manda como no completado (FALSE) y el texto ingresado. ESte eñ meotodo def data.
         self.modelo.layoutChanged.emit() # Emitir la señal para indicar cambios en el diseño del modelo. Le decimos al control que como hay datos nuevos, tiene que actualizarse.
         self.txtTarea.setText("") # Limpiar el campo de entrada de la tarea después de agregarla
 ```
 Para empezar, **modelo** es un objeto que he creado de tipo QAbstractListModel, por lo que tiene métodos, señales... asociados a los que puedo llamar por herencia.<br><br>
-`texto = self.txtTarea.text().strip()`: Obtengo el texto escrito en la caja de texto y lo guardo en la variable texto. Con el strip() elimino posibles espacios en blanco
+`texto = self.txtTarea.text().strip()`: Obtengo el texto escrito en la caja de texto y lo guardo en la variable texto. Con el **strip()** elimino posibles espacios en blanco
 que el user puede escribir al principio y al final y evitar errores.<br>
 `if texto`: si guardo algo en la variable texto haz lo siguiente:<br><br>
 `self.modelo.tareas.append((False, texto))`: uso el objeto *modelo* que instancié de QAbstractListModel, que contiene el modelo/la forma en la que va estructurada esta lista. Desde este objeto
@@ -144,7 +144,7 @@ False y que el texto es lo que obtengo de la caja de texto.<br><br>
 ```
    def on_btnBorrar_pressed(self):
        indices = self.lstTareas.selectedIndexes()# Obtenemos los elementos que el user ha marcado
-       if indices: # Si encuentra un indice..:
+       if indices: # Verifica si la lista "indices" está vacía o no con un True o False.
            for indice in sorted(indices, reverse=True): # Recorremos los indices en sentido inverso para evitar problemas al eliminar elementos. Así la va reccoriendo y guardando en índice el índice.
                 del self.modelo.tareas[indice.row()]# Borramos el elemento correspondiente al indice
            self.modelo.layoutChanged.emit()# Para actualizar la vista
@@ -152,9 +152,9 @@ False y que el texto es lo que obtengo de la caja de texto.<br><br>
 ```
 `indices = self.lstTareas.selectedIndexes()`: Obtenemos los indices de los elementos que el usuario haya marcado.<br><br>
 `if indices:`: Si encuentra algo en la variable indices haz lo siguiente:<br><br>
-`for indice in sorted(indices, reverse=True):`: Esto crea una nueva lista ordenada a partir de la lista original indices. El argumento reverse=True indica que la ordenación se realizará en orden descendente. Esto significa que los elementos se ordenarán de mayor a menor. Esto
-se hace para evitar problemas a la hora de eliminar un elemento de la lista. Así, la va recorriendo y guardando lo que en encuentra en la variable índice.<br><br>
-` del self.modelo.tareas[indice.row()]`: Elimina el elemento correspondiente al índice de la lista tareas del modelo. indice.row() devuelve la fila del índice, y eso se utiliza para eliminar el elemento específico de la lista. <br><br>
+`for indice in sorted(indices, reverse=True):`: Esto crea una nueva lista ordenada a partir de la lista original indices. El argumento **reverse=True** indica que la ordenación se realizará en orden descendente. Esto significa que los elementos se ordenarán de mayor a menor. Esto
+se hace para evitar problemas a la hora de eliminar un elemento de la lista. Así, la va recorriendo y guardando lo que en encuentra en la variable **índice**.<br><br>
+` del self.modelo.tareas[indice.row()]`: Elimina el elemento correspondiente al índice de la lista tareas del modelo. **indice.row()** devuelve la fila del índice, y eso se utiliza para eliminar el elemento específico de la lista. <br><br>
 `self.modelo.layoutChanged.emit()`: Para actualizar la presentación de la lista y reflejar los cambios (añadir tarea, eliminar..)<br><br>
 `self.lstTareas.clearSelection()`: Para evitar que queden elementos seleccionados
 
@@ -164,7 +164,7 @@ se hace para evitar problemas a la hora de eliminar un elemento de la lista. As�
 ```
 def on_btnHecho_pressed(self):
     indices = self.lstTareas.selectedIndexes()# Obtenemos los indices de los elementos seleccionados
-    if indices:
+    if indices: # Verifica si la lista indices está vacía o no con un True o False.
        for indice in indices: # Recorro los indices y los voy guardando en la varibale indice
            estado,texto = self.modelo.tareas[indice.row()]# En cada índice, guarda el contenido en estado y texto
            self.modelo.tareas[indice.row()] = (True, texto) # Cambio el estado a true
