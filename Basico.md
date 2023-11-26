@@ -8,7 +8,9 @@
 [FIRMAS DE MÉTODOS](#firmas-de-metodos)<br>
 [TUPLAS](#tuplas)<br>
 [ENUMERATE](#enumerate)<br>
-[FOR IN](#for-in)
+[DICCIONARIO](#diccionario)
+[FOR IN](#for-in)<br>
+[PRINT](#print)
 
 --------------------------
 
@@ -226,7 +228,8 @@ no puedo modificar su contenido.
 ## ENUMERATE
 
 [Volver arriba](#inicio)</sup><br>
-Es una función que itera sobre una **lista/tupla** y nos retorna una tupla con el índice y el valor de los elementos
+Es una función que itera sobre una **lista/tupla** y nos retorna una tupla con el índice y el valor de los elementos.<br>
+Se utiliza para agregar índices a elementos de un iterable, mientras que los **diccionarios** se utilizan para asociar claves con valores. 
 ```
 frutas = ['manzana', 'plátano', 'uva']# Creo una lista
 
@@ -241,6 +244,35 @@ DANDO COMO SALIDA:
 
 ```
 --------------------------------
+
+## DICCIONARIO
+
+[Volver arriba](#inicio)</sup><br>
+
+Se usan para asociar claves con valores, siendo "nombre" la **clave** y "Juan" el **valor** asociado.
+```
+# Crear un diccionario
+mi_diccionario = {
+    "nombre": "Juan",
+    "edad": 25,
+    "ciudad": "Madrid"
+}
+
+# Acceder a valores mediante claves
+nombre = mi_diccionario["nombre"]
+edad = mi_diccionario["edad"]
+ciudad = mi_diccionario["ciudad"]
+
+# Imprimir los valores
+print("Nombre: " + nombre)
+print("Edad: " + str(edad))
+print("Ciudad: " + ciudad)
+
+```
+
+
+
+-----------------------------------
 
 ## FOR IN
 
@@ -257,3 +289,39 @@ print("Fin del procesamiento")
 Va itereando por todos los elementos de la lista indices y va guardando lo que encuentra en la variable indice.
 
 ----------------------------------
+
+## PRINT
+
+[Volver arriba](#inicio)</sup>
+
+Python permite la concatenación con otros String. Si deseas concatenar una cadena con un número, puedes hacerlo sin necesidad de utilizar **str()** explícitamente, siempre y cuando todo el contenido de la concatenación sea compatible: **print(2+2)**. Así: 
+```
+numero = 42
+print("El número es: " + str(numero))
+```
+
+Otra forma de imprimir:
+```
+numero = 42
+cadena_resultante = f"El número es: {numero}"
+print(cadena_resultante)
+```
+
+Por lo tanto:
+```
+# Concatenación de cadenas con el operador +
+cadena1 = "Hola"
+cadena2 = " mundo"
+resultado = cadena1 + cadena2
+print(resultado)  # Salida: Hola mundo
+
+# Concatenación de cadena con número
+numero = 42
+cadena_resultante = "El número es: " + str(numero)
+print(cadena_resultante)  # Salida: El número es: 42
+
+# Concatenación de cadena con f-string
+cadena_resultante = f"{cadena1}{cadena2}, el número es: {numero}"
+print(cadena_resultante)  # Salida: Hola mundo, el número es: 42
+
+```

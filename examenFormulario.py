@@ -43,8 +43,10 @@ class VentanaPrincipal(QMainWindow):
         cajaV3.addLayout(cajaH3)
         boton4 = QPushButton("Saltar")
         cajaH3.addWidget(boton4)
-        combo1 = QComboBox()
-        cajaH3.addWidget(combo1)
+        self.combo1 = QComboBox()
+        self.combo1.addItems(["Britney","Lana","La Beyonsebe"])# Añado items al ComboBox
+        self.combo1.activated.connect(self.on_mostrarComboBox_activated)# Añado evento ACTIVATED a ComboBOX
+        cajaH3.addWidget(self.combo1)
         boton5 = QPushButton("Abrir ficheiro...")
         cajaV3.addWidget(boton5)
         boton6 = QPushButton("Reproducir ficheiro...")
@@ -73,6 +75,7 @@ class VentanaPrincipal(QMainWindow):
         grid1.addWidget(sliderRitmo, 1,1,1,2)
         sliderVolumen = QSlider(Qt.Orientation.Horizontal)
         grid1.addWidget(sliderVolumen, 2, 1, 1, 2)
+        sliderVolumen.valueChanged.connect(self.on_mostrarVolumen_slider)# Añado evento VALUE_CHANGED a SliderVolumen
         comboF = QComboBox()
         grid1.addWidget(comboF,3,1,1,2)
         comboSa = QComboBox()
@@ -102,6 +105,22 @@ class VentanaPrincipal(QMainWindow):
         self.setCentralWidget(container)
         self.setFixedSize(800,400)
         self.show()
+
+    def on_mostrarVolumen_slider(self,valor):
+        print("Valor del QSlider"+str(valor))
+
+    def on_mostrarComboBox_activated(self, index):
+        cantante_seleccionada = self.combo1.currentText()
+        opcion_escogida = self.combo1.currentIndex()
+
+        print("Cantante seleccionada: "+cantante_seleccionada)
+        print(f"Formato seleccionado: {cantante_seleccionada}")
+        print("Opción escogida "+str(opcion_escogida))
+        print(f"Opcion escogida: {opcion_escogida}")
+
+
+
+
 
 
 

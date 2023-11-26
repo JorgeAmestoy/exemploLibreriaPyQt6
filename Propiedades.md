@@ -124,7 +124,7 @@ caixaH2.addWidget(frame) # Añado a otro layout el marco con la caja dentro
 Los tabs son las pestañas. Para añadirlas usamos: `.addTab()`.<br>
 Así, en la firma del método (o en el error al ejecutar), me pone que es obligatorio pasar como parámetros
 un widget y un String de forma **Optional**, por lo que en caso de no usarlo debemos escribir
-**None**. Este String es el nombre que aparecerá en cada pestaña.
+**None**. Este String es el nombre que aparecerá en cada pestaña en la interfaz.
 ```
 tabs = QTabWidget()
 tabs.setTabPosition(QTabWidget.TabPosition.South)# Las coloca en la parte inferior

@@ -8,7 +8,9 @@
 [CLICKED](#clicked)<br>
 [RETURN_PRESSED](#return-pressed)<br>
 [TOGGLED](#toggled)<br>
-[PRESSED](#pressed)
+[PRESSED](#pressed)<br>
+[VALUE_CHANGED](#value-changed)<br>
+[ACTIVATED](#activated)
 
 -----------------------------
 
@@ -88,7 +90,7 @@ Self.checkBox.toggled.connect(self.on_checkBox_toggled)
 -----------------------------------------------
 
 ### MÉTODO QUE AL PULSAR RADIO_BUTTON IMPRIME POR PANTALLA QUÉ BOTÓN SE HA SELECCIONADO Y DESELECCIONADO(ejemploCheckboxRadio.py)<br>
-Aquí usamos el método **isChecked()** del checkBox para realizar algo en caso de que se haya seleccionado dicho botón
+Igual que en el **CheckBox** aquí usamos el método **isChecked()** del radioButton para realizar algo en caso de que se haya seleccionado dicho botón
 
 ```
 #EN LA LLAMADA AL MÉTODO NO SE PONEN PARÉNTESIS
@@ -110,8 +112,6 @@ def on_radioButton_toggled(self):
 [Volver arriba](#inicio)</sup>
 
 ----------------------------
-
-
 ### MÉTODO QUE ME DEVUELVE EL ÍNDICE DE CADA TARJETA DEL QSTACKEDLAYOUT<br>
 Así, cuando pulse el botón me aparecerá el contenido de la tarjet[0]
 ```
@@ -160,6 +160,23 @@ se hace para evitar problemas a la hora de eliminar un elemento de la lista. As�
 
 
 -----------------------------------------
+
+### MÉTODO QUE EDITA EL TEXTO DE UNA TAREA
+
+    def on_editarLista_clicked(self):
+        texto = self.txtCaja.text().strip()
+        indices = self.lista.selectedIndexes()
+        if indices:
+            for indice in indices:
+                ##estado, texto = self.modelo.tareas[indice.row()]
+                self.modelo.tareas[indice.row()] = (False, texto)
+                self.modelo.dataChanged.emit(indice,indice)
+                self.lista.clearSelection()
+                self.txtCaja.setText("")
+
+-------------------------------------------------
+
+
 ### MÉTODO QUE DICE SI TAREA SE HA HECHO O NO
 ```
 def on_btnHecho_pressed(self):
@@ -179,3 +196,45 @@ def on_btnHecho_pressed(self):
 `self.modelo.tareas[indice.row()] = (True, texto)`: Según el índice que se vaya encontrando durante el for, cambio el estado a True.<br><br>
 `self.modelo.dataChanged.emit(indice, indice)`: Actualizo usando el *dataChanged* para notificar cambios específicos. El layout es para cambiar toda la lista, este en cambio, una parte de la lista.<br><br>
 `self.lstTareas.clearSelection()`:Para evitar que queden elementos seleccionados
+
+--------------------------------------------
+
+## VALUE CHANGED
+
+[Volver arriba](#inicio)</sup>
+
+---------------------------------------------
+
+## MÉTODO QUE DEVUELVE EL VALOR DEL SLIDER AL MOVERLO
+```
+sliderVolumen.valueChanged.connect(self.on_mostrarVolumen_slider)
+
+def on_mostrarVolumen_slider(self,valor):
+    print("Valor del QSlider"+str(valor))
+```
+Cuando el valor del QSlider cambia, se emitirá la señal **valueChanged**, y esta señal está conectada al método **on_mostrarVolumen_slider**. Como resultado, cada vez que el usuario mueva el control deslizante del volumen, se llamará automáticamente al método on_mostrarVolumen_slider con el nuevo valor del deslizador como argumento.
+
+-----------------------------------------------
+
+## ACTIVATED
+
+[Volver arriba](#inicio)</sup>
+
+-------------------------------------------------
+## MÉTODO QUE DEVUELVE EL VALOR DEL SLIDER AL MOVERLO
+```
+self.combo1 = QComboBox()
+self.combo1.addItems(["Britney","Lana","La Beyonsebe"])# Añado items al ComboBox
+self.combo1.activated.connect(self.on_mostrarComboBox_activated)# Añado evento ACTIVATED a ComboBOX
+
+def on_mostrarComboBox_activated(self, index):
+     cantante_seleccionada = self.combo1.currentText()
+     opcion_escogida = self.combo1.currentIndex()
+
+     print("Cantante seleccionada: "+cantante_seleccionada)
+     print(f"Formato seleccionado: {cantante_seleccionada}")
+     print("Opción escogida "+str(opcion_escogida))
+     print(f"Opcion escogida: {opcion_escogida}")
+```
+La línea `self.combo1.activated.connect(self.on_mostrarComboBox_activated)` establece una conexión entre la señal activated del objeto **combo1** (un QComboBox) y el método `on_mostrarComboBox_activated` de la instancia actual de la clase.
+En PyQt, la **señal activated** se emite cuando el usuario selecciona un elemento en el combo box. Al conectar esta señal a un método, en este caso `on_mostrarComboBox_activated`, estás configurando la lógica que se ejecutará cuando el usuario marque una opción del combo.
