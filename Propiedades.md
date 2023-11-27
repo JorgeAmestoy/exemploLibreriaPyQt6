@@ -266,11 +266,17 @@ tabs.setTabPosition(QTabWidget.TabPosition.South)
 ```
 
 -------------------------------
+#### AÑADIR MÁRGENES
+```
+cajaH2.setContentsMargins(0,0,100,0)
+```
 ## METODOS
 
 [Volver arriba](#inicio)</sup>
 
 ---------------------------------------
+
+### SPLIT()
 
 ### MÉTODO INIT DE CAJACOLOR
 ```
